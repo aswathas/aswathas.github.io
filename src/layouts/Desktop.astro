@@ -1,5 +1,6 @@
 ---
 import '../styles/desktop.css';
+import Palette from './Palette.astro';
 import { identity, projects, posts, nav } from '../data/site';
 
 type Props = { title: string; window?: string; path?: string };
@@ -28,6 +29,12 @@ const stats = [
     <meta property="og:description" content={identity.tagline} />
     <meta property="og:url" content={Astro.url.href} />
     <meta property="og:type" content="website" />
+    <script is:inline>
+      try {
+        const t = localStorage.getItem('theme');
+        if (t) document.documentElement.dataset.theme = t;
+      } catch {}
+    </script>
     <script type="application/ld+json" set:html={JSON.stringify({
       '@context': 'https://schema.org',
       '@type': 'Person',
@@ -86,6 +93,12 @@ const stats = [
         </details>
 
         <span class="spacer"></span>
+        <button class="menubar-btn" data-palette-open aria-label="Search everything">
+          <span aria-hidden="true">⌕</span>
+        </button>
+        <button class="menubar-btn" data-theme-toggle aria-label="Switch colour theme">
+          <span data-theme-icon aria-hidden="true">◐</span>
+        </button>
         <span class="clock" data-clock></span>
       </header>
 
@@ -197,6 +210,24 @@ const stats = [
         }
       });
 
+      // Theme: auto -> light -> dark -> auto, persisted.
+      const root = document.documentElement;
+      const ORDER = ['', 'light', 'dark'];
+      const icon = document.querySelector('[data-theme-icon]');
+      document.querySelector('[data-theme-toggle]')?.addEventListener('click', () => {
+        const next = ORDER[(ORDER.indexOf(root.dataset.theme ?? '') + 1) % ORDER.length];
+        if (next) root.dataset.theme = next;
+        else delete root.dataset.theme;
+        try {
+          next ? localStorage.setItem('theme', next) : localStorage.removeItem('theme');
+        } catch {}
+        if (icon) icon.textContent = next === 'dark' ? '●' : next === 'light' ? '○' : '◐';
+      });
+      if (icon) {
+        const t = root.dataset.theme ?? '';
+        icon.textContent = t === 'dark' ? '●' : t === 'light' ? '○' : '◐';
+      }
+
       // Clock.
       const clock = document.querySelector<HTMLElement>('[data-clock]')!;
       const tick = () => {
@@ -206,6 +237,14 @@ const stats = [
       };
       tick();
       setInterval(tick, 20_000);
+    </script>
+
+    <Palette />
+
+    <script>
+      document.querySelector('[data-palette-open]')?.addEventListener('click', () => {
+        document.querySelector('.palette')?.showModal();
+      });
     </script>
 
     <script>

@@ -1,0 +1,37 @@
+---
+import Desktop from '../layouts/Desktop.astro';
+import { projects, identity } from '../data/site';
+
+Astro.response.headers.set('Cache-Control', 'public, max-age=600');
+---
+
+<Desktop title="Not found" window="Not Found" path={Astro.url.pathname}>
+  <h1>Not found</h1>
+  <p class="lede">
+    Nothing lives at <code>{Astro.url.pathname}</code>. The window is real; the page is not.
+  </p>
+
+  <div class="buttons">
+    <a class="btn primary" href="/">Back to work</a>
+    <a class="btn" href="/search/">Search everything</a>
+  </div>
+
+  <h2 style="margin-top:26px">TRY ONE OF THESE</h2>
+  <ul class="cards">
+    {
+      projects.slice(0, 5).map((p) => (
+        <li>
+          <a class="card" href={`/project/${p.slug}/`}>
+            <img class="card-icon" src={`/projects/${p.slug}.svg`} alt="" width="30" height="30" />
+            <strong>{p.name}</strong>
+            <span>{p.description}</span>
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+
+  <p class="muted" style="margin-top:18px">
+    Or say hello on <a href={identity.github} rel="noreferrer">GitHub</a>.
+  </p>
+</Desktop>
