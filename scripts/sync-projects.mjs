@@ -23,7 +23,7 @@ const ALLOW = new Set(['ForensicToolW3', 'health-lovely', 'Stripe-Stablecoin-', 
 const gh = (args) => JSON.parse(execFileSync('gh', args, { encoding: 'utf8', maxBuffer: 1 << 26 }));
 
 const repos = gh(['repo', 'list', HANDLE, '--limit', '200', '--json',
-  'name,description,stargazerCount,primaryLanguage,pushedAt,createdAt,url,isFork,isArchived,homepageUrl,repositoryTopics']);
+  'name,description,stargazerCount,primaryLanguage,pushedAt,createdAt,url,isFork,isArchived,homepageUrl,repositoryTopics,licenseInfo,diskUsage,openGraphImageUrl']);
 
 const kept = repos
   .filter((r) => !r.isFork && !r.isArchived && !DENY.has(r.name.trim()))
@@ -36,6 +36,8 @@ const kept = repos
     url: r.homepageUrl?.trim() || r.url,
     repo: r.url,
     topics: (r.repositoryTopics ?? []).map((t) => t.name),
+    license: r.licenseInfo?.spdxId && r.licenseInfo.spdxId !== 'NOASSERTION' ? r.licenseInfo.spdxId : null,
+    image: r.openGraphImageUrl || null,
     createdAt: r.createdAt.slice(0, 10),
     pushedAt: r.pushedAt.slice(0, 10),
   }))

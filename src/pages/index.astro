@@ -24,7 +24,7 @@ import { identity, projects, posts, archive, languages, stats } from '../data/si
     {
       projects.map((p) => (
         <li>
-          <a class="card" href={p.url} rel="noreferrer">
+          <a class="card" href={`/project/${p.slug}/`}>
             <strong>{p.name}</strong>
             <span>{p.description}</span>
             <span class="meta">
@@ -73,17 +73,8 @@ import { identity, projects, posts, archive, languages, stats } from '../data/si
   </table>
 
   <script>
-    // Per-project star counts come from the edge function, not the build.
-    fetch('/api/live.json', { signal: AbortSignal.timeout(8000) })
-      .then((r) => (r.ok ? r.json() : Promise.reject(new Error(String(r.status)))))
-      .then((d) => {
-        for (const [repo, v] of Object.entries(d.projects ?? {})) {
-          const el = document.querySelector(`[data-repo="${repo}"]`);
-          if (el) el.textContent = `${v.stars.toLocaleString('en-US')} stars`;
-        }
-      })
-      .catch(() => {
-        for (const el of document.querySelectorAll('[data-repo]')) el.textContent = 'stars unavailable';
-      });
+    import { syncStars } from '../lib/stars';
+
+    syncStars();
   </script>
 </Desktop>

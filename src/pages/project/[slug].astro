@@ -1,0 +1,261 @@
+---
+import Desktop from '../../layouts/Desktop.astro';
+import { projects, identity } from '../../data/site';
+import raw from '../../data/projects.json';
+
+export function getStaticPaths() {
+  return projects.map((p) => {
+    const repo = raw.projects.find((r) => p.repos?.includes(r.name) || r.repo === p.url);
+    return { params: { slug: p.slug }, props: { project: p, repo } };
+  });
+}
+
+const { project, repo } = Astro.props;
+const image = repo?.image;
+---
+
+<Desktop title={`${project.name}`} window={project.name} path={`/project/${project.slug}/`}>
+  <section class="getinfo" aria-labelledby="product-title">
+    <div class="main">
+      <header>
+        <span class="hero-icon" data-initial={project.name[0]} aria-hidden="true">
+          {image && (
+            <img src={image} alt="" width="72" height="72" loading="lazy" decoding="async" />
+          )}
+        </span>
+        <div>
+          <h1 id="product-title">{project.name}</h1>
+          {project.tagline && <p class="tagline">{project.tagline}</p>}
+        </div>
+      </header>
+
+      <p class="prose">{project.description}</p>
+
+      <nav class="buttons" aria-label={`${project.name} links`}>
+        <a class="btn primary" href={project.url} rel="noreferrer">Source ↗</a>
+        {repo && <a class="btn" href={`${repo.repo}/releases`} rel="noreferrer">Releases ↗</a>}
+        <a class="btn" href={identity.github}>GitHub ↗</a>
+      </nav>
+    </div>
+
+    <aside class="inspector panel" aria-label={`${project.name} info`}>
+      <dl class="info">
+        {project.kind && <><dt>Kind</dt><dd>{project.kind}</dd></>}
+        {project.status && <><dt>Status</dt><dd>{project.status}</dd></>}
+        <dt>License</dt><dd>{repo?.license ?? 'Unlicensed'}</dd>
+        {project.runsOn && <><dt>Runs on</dt><dd>{project.runsOn}</dd></>}
+        <dt>Language</dt><dd>{project.language}</dd>
+        {repo && <><dt>Pushed</dt><dd>{repo.pushedAt}</dd></>}
+        <dt>Stars</dt><dd data-repo={project.repos?.[0] ?? project.name}>—</dd>
+      </dl>
+
+      {
+        project.highlights && (
+          <dl class="stats">
+            {project.highlights.map(([value, label]) => (
+              <div>
+                <dt>{value}</dt>
+                <dd>{label}</dd>
+              </div>
+            ))}
+          </dl>
+        )
+      }
+    </aside>
+  </section>
+
+  {
+    project.tags.length > 0 && (
+      <details class="section" open>
+        <summary>
+          <h2>Stack</h2>
+          <span class="count">{project.tags.length}</span>
+        </summary>
+        <ul class="tokens">
+          {project.tags.map((t) => (
+            <li>{t}</li>
+          ))}
+        </ul>
+      </details>
+    )
+  }
+
+  {
+    project.capabilities?.length && (
+      <details class="section" open>
+        <summary>
+          <h2>Capabilities</h2>
+          <span class="count">{project.capabilities.length}</span>
+        </summary>
+        <div class="panel-grid">
+          {project.capabilities.map((c) => (
+            <article class="panel">
+              <h3>{c.title}</h3>
+              <p>{c.body}</p>
+            </article>
+          ))}
+        </div>
+      </details>
+    )
+  }
+
+  {
+    project.table && (
+      <details class="section" open>
+        <summary>
+          <h2>{'Details'}</h2>
+        </summary>
+        <div class="table-scroll" tabindex="0" role="region" aria-label="Details table">
+          <table>
+            <thead>
+              <tr>
+                {project.table.head.map((h) => (
+                  <th scope="col">{h}</th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {project.table.rows.map((r) => (
+                <tr>
+                  {r.map((c, i) => (i === 0 ? <th scope="row">{c}</th> : <td>{c}</td>))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </details>
+    )
+  }
+
+  {
+    project.gallery?.length && (
+      <details class="section" open>
+        <summary>
+          <h2>Gallery</h2>
+          <span class="count">{project.gallery.length}</span>
+        </summary>
+        <ul class="gallery">
+          {project.gallery.map((g, i) => (
+            <li>
+              <figure>
+                <a href={g.src} data-preview={String(i)} data-title={project.name}>
+                  <img src={g.src} alt={g.caption} loading="lazy" decoding="async" />
+                </a>
+                <figcaption>{g.caption}</figcaption>
+              </figure>
+            </li>
+          ))}
+        </ul>
+      </details>
+    )
+  }
+
+  <details class="section">
+    <summary>
+      <h2>Repositories</h2>
+      <span class="count">{project.repos?.length ?? 1}</span>
+    </summary>
+    <ul class="cards">
+      {(project.repos ?? [project.name]).map((r) => {
+        const meta = raw.projects.find((x) => x.name === r);
+        return (
+          <li>
+            <a class="card" href={meta?.repo ?? project.url} rel="noreferrer">
+              <strong>{r}</strong>
+              <span>{meta?.description ?? 'Source'}</span>
+              <span class="meta">
+                {meta?.language ?? project.language} · {meta?.pushedAt ?? ''}
+              </span>
+            </a>
+          </li>
+        );
+      })}
+    </ul>
+  </details>
+
+  <p style="margin-top:20px"><a class="btn" href="/">← All projects</a></p>
+
+  <script>
+    import { syncStars } from '../../lib/stars';
+
+    syncStars();
+  </script>
+
+  <script>
+    // Preview dialog: a window that opens on a screenshot, with keyboard control.
+    // GitHub's OG image 404s for repos without one; show the monogram instead.
+  for (const box of document.querySelectorAll('.hero-icon img')) {
+    box.addEventListener('error', () => box.remove(), { once: true });
+  }
+
+  const calm = matchMedia('(prefers-reduced-motion: reduce)');
+    const triggers = [...document.querySelectorAll('[data-preview]')];
+    if (triggers.length) {
+      const dlg = document.createElement('dialog');
+      dlg.className = 'preview';
+      dlg.setAttribute('aria-label', 'Preview');
+      dlg.innerHTML = `
+        <div class="preview-titlebar">
+          <div class="lights">
+            <button type="button" class="light close" data-close aria-label="Close preview"><span aria-hidden="true">×</span></button>
+            <button type="button" class="light minimize" data-close aria-label="Minimize preview"><span aria-hidden="true">−</span></button>
+            <button type="button" class="light zoom" data-zoom aria-label="Zoom preview" aria-pressed="false"><span aria-hidden="true">+</span></button>
+          </div>
+          <div class="preview-title"></div>
+        </div>
+        <div class="preview-toolbar">
+          <div class="nav-buttons">
+            <button type="button" class="btn" data-step="-1" aria-label="Previous screenshot">◀</button>
+            <button type="button" class="btn" data-step="1" aria-label="Next screenshot">▶</button>
+          </div>
+          <span class="preview-count" aria-live="polite"></span>
+          <a class="btn" target="_blank" rel="noopener">Open Original ↗</a>
+        </div>
+        <div class="preview-stage"><img alt="" /></div>`;
+      document.body.append(dlg);
+
+      const img = dlg.querySelector('.preview-stage img');
+      const title = dlg.querySelector('.preview-title');
+      const count = dlg.querySelector('.preview-count');
+      const open = dlg.querySelector('a');
+      const shots = triggers.map((a) => a.querySelector('img'));
+      let i = 0;
+
+      const show = (n) => {
+        i = (n + shots.length) % shots.length;
+        const el = shots[i];
+        img.src = el.currentSrc || el.src;
+        img.alt = el.alt;
+        title.textContent = triggers[i].dataset.title ?? '';
+        count.textContent = `${i + 1} / ${shots.length}`;
+        open.href = triggers[i].href;
+      };
+
+      for (const t of triggers) {
+        t.addEventListener('click', (e) => {
+          e.preventDefault();
+          show(Number(t.dataset.preview));
+          dlg.showModal();
+        });
+      }
+
+      dlg.addEventListener('click', (e) => {
+        if (e.target.closest('[data-close]')) dlg.close();
+        else if (e.target.closest('[data-zoom]')) {
+          const on = dlg.classList.toggle('zoomed');
+          if (calm.matches) return;
+          dlg.querySelector('[data-zoom]').setAttribute('aria-pressed', String(on));
+        } else if (e.target.closest('[data-step]')) {
+          show(i + Number(e.target.closest('[data-step]').dataset.step));
+        } else if (e.target === dlg) {
+          dlg.close();
+        }
+      });
+
+      dlg.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowRight') show(i + 1);
+        if (e.key === 'ArrowLeft') show(i - 1);
+      });
+    }
+  </script>
+</Desktop>

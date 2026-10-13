@@ -57,7 +57,7 @@ const stats = [
           <summary>Applications</summary>
           <div class="sheet">
             <h2>APPLICATIONS</h2>
-            {projects.slice(0, 8).map((p) => <a href={p.url} rel="noreferrer">{p.name}</a>)}
+            {projects.slice(0, 8).map((p) => <a href={`/project/${p.slug}/`}>{p.name}</a>)}
           </div>
         </details>
 
@@ -98,7 +98,7 @@ const stats = [
                 <a href={n.href} aria-current={current === n.href ? 'page' : undefined}>{n.label}</a>
               ))}
               <h2>PROJECTS</h2>
-              {projects.slice(0, 6).map((p) => <a href={p.url} rel="noreferrer">{p.name}</a>)}
+              {projects.slice(0, 6).map((p) => <a href={`/project/${p.slug}/`}>{p.name}</a>)}
             </nav>
 
             <main class="pane" id="main">
