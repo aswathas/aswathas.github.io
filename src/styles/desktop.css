@@ -1082,3 +1082,92 @@ select {
   width: 100%;
   height: 100%;
 }
+
+/* README rendered from the repository */
+.readme {
+  max-width: 74ch;
+  padding-bottom: 18px;
+}
+
+.readme h1,
+.readme h2,
+.readme h3 {
+  margin: 1.4em 0 0.4em;
+  line-height: 1.25;
+}
+
+.readme h1 { font-size: 1.5rem; }
+.readme h2 { font-size: 1.15rem; }
+.readme h3 { font-size: 1rem; }
+
+.readme p,
+.readme li {
+  line-height: 1.65;
+}
+
+.readme img {
+  max-width: 100%;
+  height: auto;
+}
+
+.readme pre {
+  overflow-x: auto;
+  padding: 12px 14px;
+  border: 1px solid var(--hairline);
+  border-radius: 10px;
+  background: var(--panel-bg);
+  font: 12px/1.55 var(--font-mono);
+}
+
+.readme code {
+  background: var(--panel-bg);
+}
+
+.readme pre code {
+  background: none;
+  padding: 0;
+}
+
+.readme table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.readme th,
+.readme td {
+  padding: 6px 10px;
+  border-bottom: 1px solid var(--hairline);
+  text-align: left;
+}
+
+.readme blockquote {
+  margin: 1em 0;
+  padding-left: 14px;
+  border-left: 3px solid var(--hairline);
+  color: var(--text-2);
+}
+
+/* project iconography */
+.sidebar a img,
+.menu .sheet a img {
+  margin-right: 6px;
+  vertical-align: -3px;
+  border-radius: 4px;
+}
+
+.card {
+  grid-template-columns: auto 1fr;
+  align-items: start;
+  column-gap: 10px;
+}
+
+.card > strong,
+.card > span:not(.meta) {
+  grid-column: 2;
+}
+
+.card-icon {
+  grid-column: 1;
+  grid-row: 1 / span 3;
+  border-radius: 7px;
+}

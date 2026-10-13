@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" role="img" aria-label="chain-sentinel">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2c4fb8"/><stop offset="1" stop-color="#117f94"/>
+    </linearGradient>
+  </defs>
+  <rect width="128" height="128" rx="28" fill="url(#g)"/>
+  <rect x="1" y="1" width="126" height="126" rx="27" fill="none" stroke="#fff" stroke-opacity=".18" stroke-width="2"/>
+  <path d="M64 32 96 46v30c0 20-14 30-32 38-18-8-32-18-32-38V46Z" fill="#fff" opacity=".95"/>
+      <path d="M64 52v34M48 68h32" stroke="#2c4fb8" stroke-width="7" stroke-linecap="round"/>
+</svg>

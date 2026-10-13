@@ -2,6 +2,8 @@
 import Desktop from '../../layouts/Desktop.astro';
 import { projects, identity } from '../../data/site';
 import raw from '../../data/projects.json';
+import readmes from '../../data/readmes.json';
+import { marked } from 'marked';
 
 export function getStaticPaths() {
   return projects.map((p) => {
@@ -11,18 +13,23 @@ export function getStaticPaths() {
 }
 
 const { project, repo } = Astro.props;
-const image = repo?.image;
----
+const icon = `/projects/${project.slug}.svg`;
 
+// READMEs come from the user's own repositories at build time, so the rendered
+// HTML is trusted input. Do not reuse this path for third-party content.
+const readme = readmes[project.slug];
+const readmeHtml = readme?.markdown
+  ? marked
+      .parse(readme.markdown)
+      // Relative links and images in a README only resolve inside the repo.
+      .replace(/(href|src)="(?!https?:|data:|#)/g, `$1="${repo?.repo ?? ''}/blob/HEAD/`)
+  : '';
+---
 <Desktop title={`${project.name}`} window={project.name} path={`/project/${project.slug}/`}>
   <section class="getinfo" aria-labelledby="product-title">
     <div class="main">
       <header>
-        <span class="hero-icon" data-initial={project.name[0]} aria-hidden="true">
-          {image && (
-            <img src={image} alt="" width="72" height="72" loading="lazy" decoding="async" />
-          )}
-        </span>
+        <img class="hero-icon" src={icon} alt="" width="72" height="72" decoding="async" />
         <div>
           <h1 id="product-title">{project.name}</h1>
           {project.tagline && <p class="tagline">{project.tagline}</p>}
@@ -150,6 +157,18 @@ const image = repo?.image;
     )
   }
 
+  {
+    readmeHtml && (
+      <details class="section" open>
+        <summary>
+          <h2>README</h2>
+          <span class="count">{readme.bytes.toLocaleString('en-US')} B</span>
+        </summary>
+        <div class="prose readme" set:html={readmeHtml} />
+      </details>
+    )
+  }
+
   <details class="section">
     <summary>
       <h2>Repositories</h2>
@@ -183,12 +202,7 @@ const image = repo?.image;
 
   <script>
     // Preview dialog: a window that opens on a screenshot, with keyboard control.
-    // GitHub's OG image 404s for repos without one; show the monogram instead.
-  for (const box of document.querySelectorAll('.hero-icon img')) {
-    box.addEventListener('error', () => box.remove(), { once: true });
-  }
-
-  const calm = matchMedia('(prefers-reduced-motion: reduce)');
+    const calm = matchMedia('(prefers-reduced-motion: reduce)');
     const triggers = [...document.querySelectorAll('[data-preview]')];
     if (triggers.length) {
       const dlg = document.createElement('dialog');

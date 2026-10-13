@@ -26,6 +26,7 @@ import { identity, projects, posts, archive, languages, stats } from '../data/si
       projects.map((p) => (
         <li>
           <a class="card" href={`/project/${p.slug}/`}>
+            <img class="card-icon" src={`/projects/${p.slug}.svg`} alt="" width="30" height="30" />
             <strong>{p.name}</strong>
             <span>{p.description}</span>
             <span class="meta">
