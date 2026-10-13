@@ -2,8 +2,6 @@
 import Desktop from '../../layouts/Desktop.astro';
 import { projects, identity } from '../../data/site';
 import raw from '../../data/projects.json';
-import readmes from '../../data/readmes.json';
-import { marked } from 'marked';
 
 export function getStaticPaths() {
   return projects.map((p) => {
@@ -15,15 +13,6 @@ export function getStaticPaths() {
 const { project, repo } = Astro.props;
 const icon = `/projects/${project.slug}.svg`;
 
-// READMEs come from the user's own repositories at build time, so the rendered
-// HTML is trusted input. Do not reuse this path for third-party content.
-const readme = readmes[project.slug];
-const readmeHtml = readme?.markdown
-  ? marked
-      .parse(readme.markdown)
-      // Relative links and images in a README only resolve inside the repo.
-      .replace(/(href|src)="(?!https?:|data:|#)/g, `$1="${repo?.repo ?? ''}/blob/HEAD/`)
-  : '';
 ---
 <Desktop title={`${project.name}`} window={project.name} path={`/project/${project.slug}/`}>
   <section class="getinfo" aria-labelledby="product-title">
@@ -176,17 +165,6 @@ const readmeHtml = readme?.markdown
     )
   }
 
-  {
-    readmeHtml && (
-      <details class="section" open>
-        <summary>
-          <h2>README</h2>
-          <span class="count">{readme.bytes.toLocaleString('en-US')} B</span>
-        </summary>
-        <div class="prose readme" set:html={readmeHtml} />
-      </details>
-    )
-  }
 
   <details class="section">
     <summary>

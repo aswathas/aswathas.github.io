@@ -308,10 +308,15 @@ select:focus-visible {
 }
 
 .sidebar {
+  /* Stays put while the main pane scrolls, otherwise the rail scrolls away
+     and leaves a void beside the content. */
+  position: sticky;
+  top: 0;
+  align-self: start;
+  max-height: 100%;
   border-right: 1px solid var(--hairline);
   background: var(--panel-bg);
   padding: 14px;
-  /* Fits without scrolling on a normal screen; scrolls only on a very short one. */
   overflow-y: auto;
 }
 
@@ -898,8 +903,8 @@ select {
 
 .gallery {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(min(128px, 100%), 1fr));
-  gap: 12px 10px;
+  grid-template-columns: repeat(auto-fill, minmax(min(190px, 100%), 1fr));
+  gap: 14px 12px;
   margin: 6px 0 4px;
   padding: 0 0 16px;
   list-style: none;

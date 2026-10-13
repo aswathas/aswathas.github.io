@@ -13,11 +13,9 @@
     "test": "node --experimental-strip-types --test test/*.test.ts",
     "deploy": "npm run build && wrangler pages deploy dist",
     "sync": "node scripts/sync-projects.mjs",
-    "sync:readmes": "node scripts/sync-readmes.mjs",
     "icons": "node scripts/make-icons.mjs"
   },
   "dependencies": {
-    "astro": "^7.3.8",
-    "marked": "^18.1.1"
+    "astro": "^7.3.8"
   }
 }

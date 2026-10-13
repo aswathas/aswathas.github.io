@@ -85,6 +85,7 @@ export const projects: Project[] = [
     ],
   },
   {
+
     name: 'ColdTrust',
     slug: 'coldtrust',
     problem: {
@@ -117,6 +118,7 @@ export const projects: Project[] = [
     ],
   },
   {
+
     name: 'AttackLogs',
     slug: 'attack-logs',
     problem: {
@@ -145,61 +147,7 @@ export const projects: Project[] = [
     ],
   },
   {
-    name: 'ChainTrace',
-    slug: 'chain-trace',
-    problem: {
-      problem: 'Following stolen crypto across chains usually means trusting a hosted explorer with your investigation, which is exactly what you cannot do.',
-      approach: 'Self-host the whole trail so nothing about the investigation leaves the machine.',
-      result: 'A self-hostable multi-chain trace you can point at your own node and keep offline.',
-    },
 
-    description:
-      'Open-source, self-hostable multi-chain blockchain forensics. Trace stolen funds across chains.',
-    language: 'HTML',
-    url: 'https://github.com/aswathas/chaintrace',
-    tags: ['forensics', 'blockchain', 'self-hosted', 'security'],
-    kind: 'Forensics tool',
-    status: 'Live',
-    capabilities: [
-      {
-        title: 'Self-hosted on purpose',
-        body: 'Investigation data never leaves your infrastructure, which is usually the first requirement in this field.',
-      },
-      {
-        title: 'Follow the money, not the alert',
-        body: 'Start from a wallet and follow transfers across chains instead of reacting to a flagged transaction.',
-      },
-    ],
-  },
-  {
-    name: 'EVM Log Extractor',
-    slug: 'evm-log-extractor',
-    problem: {
-      problem: 'Pulling raw logs off a chain is easy. Getting them into a shape a forensic tool can trust is where investigations quietly break — wrong casing, wei as floats, duplicates.',
-      approach: 'Split extraction, normalisation, and decoding into three replayable stages so a decode bug never means re-scanning a chain.',
-      result: 'A Python CLI producing flat NDJSON with EIP-55 checksummed addresses and wei as decimal strings, driven by a manifest so every stage is reproducible.',
-    },
-
-    description:
-      'Forensics-grade EVM log extractor, normaliser, and decoder for any JSON-RPC endpoint. Checksummed addresses, wei as decimal strings, flat NDJSON.',
-    language: 'Python',
-    url: 'https://github.com/aswathas/evm-log-extractor',
-    tags: ['EVM', 'forensics', 'Python', 'NDJSON', 'Foundry'],
-    kind: 'CLI toolchain',
-    status: 'Live',
-    runsOn: 'Python 3, any EVM JSON-RPC endpoint',
-    capabilities: [
-      {
-        title: 'Three stages, each replayable',
-        body: 'Extract, normalise, decode. Each writes its own NDJSON, so a decode bug never means re-scanning a chain.',
-      },
-      {
-        title: 'Correct by construction',
-        body: 'EIP-55 checksummed addresses and wei as decimal strings — the two things that quietly corrupt downstream analysis.',
-      },
-    ],
-  },
-  {
     name: 'AI Brain',
     slug: slug('ai-brain'),
     problem: {
@@ -228,34 +176,7 @@ export const projects: Project[] = [
     ],
   },
   {
-    name: 'the-analyst',
-    slug: slug('the-analyst'),
-    problem: {
-      problem: 'Revision material is scattered across a dozen PDFs and a head full of half-remembered weightings.',
-      approach: 'Structure it by topic and weight, so revision follows the syllabus instead of the textbook order.',
-      result: 'Six subjects decoded, each with paper and topic counts, a topic priority heatmap, and an exam-structure breakdown that shows where the marks actually sit.',
-    },
-    description:
-      'Semester exam intelligence — Data Science, Cloud Computing, Compiler Design and three more subjects decoded.',
-    language: 'TypeScript',
-    url: 'https://github.com/aswathas/the-analyst',
-    tags: ['TypeScript', 'study', 'reference'],
-    kind: 'Study tool',
-    status: 'Live',
-    gallery: [
-      { src: '/gallery/the-analyst-01-home.png', caption: 'Landing' },
-      { src: '/gallery/the-analyst-02-subjects-grid.png', caption: 'Six subjects' },
-      { src: '/gallery/the-analyst-03-data-science-analysis.png', caption: 'Topic heatmap' },
-      { src: '/gallery/the-analyst-04-exam-structure.png', caption: 'Exam structure' },
-    ],
-    capabilities: [
-      {
-        title: 'Six subjects, one place',
-        body: 'Data Science, Cloud Computing, Compiler Design and three more, structured so you can revise by topic instead of by chapter.',
-      },
-    ],
-  },
-  {
+
     name: 'OLX India CLI',
     slug: slug('olx-india-cli'),
     problem: {
@@ -283,28 +204,7 @@ export const projects: Project[] = [
     ],
   },
   {
-    name: 'ChainSentinel',
-    slug: slug('chain-sentinel'),
-    problem: {
-      problem: 'Exploit response usually starts from an alert, after the money has already moved.',
-      approach: 'Start from a documented attack pattern and trace it through the transaction history instead of waiting to be told.',
-      result: 'An EVM forensics tool that walks a real exploit pattern end to end across real traces.',
-    },
-    description: 'EVM blockchain forensics tool. Investigate on-chain exploits end to end.',
-    language: 'Solidity',
-    url: 'https://github.com/aswathas/Project-Hail-Mary',
-    tags: ['EVM', 'forensics', 'Solidity', 'security'],
-    kind: 'Forensics tool',
-    status: 'In development',
-    runsOn: 'Any EVM chain',
-    capabilities: [
-      {
-        title: 'Exploit-first, not alert-first',
-        body: 'Start from a documented attack pattern and trace it through real transaction traces instead of waiting for an alarm.',
-      },
-    ],
-  },
-  {
+
     name: 'ForensicToolW3',
     slug: slug('forensic-tool'),
     problem: {
@@ -341,6 +241,7 @@ export const projects: Project[] = [
     ],
   },
   {
+
     name: 'Love Lace',
     slug: slug('love-lace'),
     problem: {
@@ -373,81 +274,6 @@ export const projects: Project[] = [
       {
         title: 'Invoicing built in',
         body: 'Invoices and payments share one model, with an LLM in the loop for the parts a human would otherwise retype.',
-      },
-    ],
-  },
-  {
-    name: 'SafePass',
-    slug: 'safe-pass',
-    problem: {
-      problem: 'One-time passwords sent over SMS are readable in transit and expensive to send. The channel is the weakest link in most logins.',
-      approach: 'Anchor the challenge on-chain, where a replay is visibly wrong instead of silently accepted.',
-      result: 'A Web3 authentication system that replaces the SMS one-time password with a verifiable on-chain challenge.',
-    },
-
-    description: 'A better alternative for OTP — one-time passwords anchored on-chain instead of a shared SMS gateway.',
-    language: 'JavaScript',
-    url: 'https://github.com/aswathas/Safe_Passfortest',
-    tags: ['OTP', 'auth', 'blockchain', 'security'],
-    kind: 'Authentication system',
-    status: 'Prototype',
-    capabilities: [
-      {
-        title: 'The SMS code has a weak point',
-        body: 'One-time passwords over SMS are readable in transit and expensive to send. SafePass anchors the challenge on-chain instead.',
-      },
-      {
-        title: 'Replay stops mattering',
-        body: 'Because the challenge is a chain state, using it twice is visibly wrong rather than silently accepted.',
-      },
-    ],
-  },
-  {
-    name: 'agent-skills',
-    slug: slug('agent-skills'),
-    problem: {
-      problem: 'Prompts in a doc get copy-pasted, drift, and rot. Nobody can tell which version an agent actually used.',
-      approach: 'Package the instructions as installable skill definitions the CLI resolves itself.',
-      result: 'A skill pack for Claude Code covering deep learning, exam preparation, and knowledge work.',
-    },
-    description: 'Claude Code CLI skills for deep learning, exam prep, and knowledge work.',
-    language: 'JavaScript',
-    url: 'https://github.com/aswathas/agent-skills',
-    tags: ['agents', 'Claude Code', 'skills'],
-    kind: 'Agent skill pack',
-    status: 'Live',
-    runsOn: 'Claude Code CLI',
-    capabilities: [
-      {
-        title: 'Skills, not prompts',
-        body: 'Installable skill definitions that teach a CLI agent how to handle coursework and long-form study material.',
-      },
-    ],
-  },
-  {
-    name: 'Healthcare Tracker',
-    slug: slug('healthcare-tracker'),
-    problem: {
-      problem: 'Your health record is spread across five apps, none of which show the whole picture at once.',
-      approach: 'Put conditions, medications, results, appointments, and goals in one view over a real backend.',
-      result: 'A Next.js and Supabase dashboard with migrations, so the data model is versioned rather than trapped in local storage.',
-    },
-    description:
-      'Next.js and Supabase health management app — conditions, medications, test results, appointments, and goals in one dashboard.',
-    language: 'TypeScript',
-    url: 'https://github.com/aswathas/health-lovely',
-    tags: ['Next.js', 'Supabase', 'health', 'TypeScript'],
-    kind: 'Health management app',
-    status: 'Live',
-    runsOn: 'Web, Supabase backend',
-    capabilities: [
-      {
-        title: 'One dashboard for the whole record',
-        body: 'Conditions, medications, test results, appointments, and goals in a single view instead of five.',
-      },
-      {
-        title: 'Built on a real backend',
-        body: 'Next.js and Supabase with migrations, so the data model is versioned rather than trapped in local storage.',
       },
     ],
   },

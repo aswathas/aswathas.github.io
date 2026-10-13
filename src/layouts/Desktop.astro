@@ -136,14 +136,8 @@ const stats = [
           </div>
 
           <div class="content">
-            <nav class="sidebar" aria-label="Site">
-              <h2>ELSEWHERE</h2>
-              <a href={identity.github} rel="noreferrer">GitHub</a>
-              {identity.instagram && <a href={identity.instagram} rel="noreferrer">Instagram</a>}
-              <a href="/rss.xml">RSS</a>
-              <a href="/llms.txt">llms.txt</a>
-
-              <h2 style="margin-top:16px">APPLICATIONS</h2>
+            <nav class="sidebar" aria-label="Applications">
+              <h2>APPLICATIONS</h2>
               <ul class="app-tiles">
                 {projects.map((p) => (
                   <li>
@@ -158,6 +152,12 @@ const stats = [
                   </li>
                 ))}
               </ul>
+
+              <h2 style="margin-top:16px">ELSEWHERE</h2>
+              <a href={identity.github} rel="noreferrer">GitHub</a>
+              {identity.instagram && <a href={identity.instagram} rel="noreferrer">Instagram</a>}
+              <a href="/rss.xml">RSS</a>
+              <a href="/llms.txt">llms.txt</a>
             </nav>
 
             <main class="pane" id="main">
