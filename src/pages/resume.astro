@@ -1,29 +1,50 @@
 ---
 import Desktop from '../layouts/Desktop.astro';
-import { identity, projects, languages, stats, education } from '../data/site';
-
-const skills = languages;
+import { identity, projects, languages, stats, education, experience, skills } from '../data/site';
 ---
 
 <Desktop title="Résumé" window="Résumé" path="/resume/">
   <h1>Résumé</h1>
-  <p class="lede">{identity.bio}</p>
+  <p class="lede">{identity.tagline}</p>
 
   <div class="buttons">
-    <a class="btn primary" href={identity.github} rel="noreferrer">GitHub ↗</a>
+    <a class="btn primary" href="/resume.pdf" download>Download PDF</a>
+    <a class="btn" href="/resume.txt">Plain text</a>
+    <a class="btn" href={identity.github} rel="noreferrer">GitHub ↗</a>
     <a class="btn" href={`mailto:${identity.email}`}>{identity.email}</a>
-    <a class="btn" href="/">All projects</a>
   </div>
 
-  <h2>EDUCATION</h2>
+  <h2>PROFILE</h2>
+  <p class="prose">
+    {identity.name} is an {identity.title} and final-year CSE undergraduate at SRMIST, working across AI,
+    Web3, finance, and security. Has won national-level hackathons and freelanced client projects.
+  </p>
+
+  <h2 style="margin-top:26px">EXPERIENCE</h2>
+  {
+    experience.map((e) => (
+      <section class="job">
+        <strong>
+          {e.role} — {e.org}
+        </strong>
+        <div class="meta" style="color:var(--text-2);font-size:11px">{e.when}</div>
+        <ul>
+          {e.points.map((p) => (
+            <li>{p}</li>
+          ))}
+        </ul>
+      </section>
+    ))
+  }
+
+  <h2 style="margin-top:26px">EDUCATION</h2>
   {
     education.map((e) => (
-      <section style="margin-top:14px">
+      <section class="job">
         <strong>
           {e.degree} — {e.school}
         </strong>
         <div class="meta" style="color:var(--text-2);font-size:11px">{e.when}</div>
-        {e.detail && <p>{e.detail}</p>}
       </section>
     ))
   }
@@ -35,7 +56,7 @@ const skills = languages;
         projects.map((p) => (
           <tr>
             <td>
-              <a href={p.url} rel="noreferrer">{p.name}</a>
+              <a href={`/project/${p.slug}/`}>{p.name}</a>
               <br />
               <span class="meta">{p.description}</span>
             </td>
@@ -48,6 +69,7 @@ const skills = languages;
 
   <h2 style="margin-top:26px">SKILLS</h2>
   <p>{skills.join(' · ')}</p>
+  <p class="muted">Also: {languages.join(', ')}</p>
 
   <h2 style="margin-top:26px">AT A GLANCE</h2>
   <ul class="stats">
@@ -55,4 +77,6 @@ const skills = languages;
     <li><b>{stats.languages}</b><span>Languages</span></li>
     <li><b>{projects.length}</b><span>Featured projects</span></li>
   </ul>
+
+  <p style="margin-top:20px"><a class="btn" href={identity.portfolio} rel="noreferrer">Portfolio ↗</a></p>
 </Desktop>

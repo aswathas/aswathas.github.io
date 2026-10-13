@@ -1,6 +1,6 @@
 ---
 import '../styles/print.css';
-import { identity, projects, education, languages, stats } from '../data/site';
+import { identity, projects, education, experience, languages, stats, skills } from '../data/site';
 ---
 
 <!doctype html>
@@ -17,7 +17,7 @@ import { identity, projects, education, languages, stats } from '../data/site';
         <h1>{identity.name}</h1>
         <p class="tagline">{identity.tagline}</p>
         <p class="contact">
-          {identity.location} · {identity.handle} · <a href={`mailto:${identity.email}`}>{identity.email}</a> ·
+          {identity.location} · {identity.phone} · <a href={`mailto:${identity.email}`}>{identity.email}</a> ·
           <a href={identity.github}>github.com/{identity.handle}</a>
         </p>
       </div>
@@ -32,6 +32,23 @@ import { identity, projects, education, languages, stats } from '../data/site';
             <div>
               {e.school} — {e.when}
             </div>
+          </div>
+        ))
+      }
+    </section>
+
+    <section>
+      <h2>Experience</h2>
+      {
+        experience.map((e) => (
+          <div class="job">
+            <div class="row">
+              <strong>
+                {e.role} — {e.org}
+              </strong>
+              <span class="when">{e.when}</span>
+            </div>
+            <p>{e.points.join(' ')}</p>
           </div>
         ))
       }
@@ -54,7 +71,8 @@ import { identity, projects, education, languages, stats } from '../data/site';
 
     <section>
       <h2>Skills</h2>
-      <p class="skills">{languages.join(' · ')}</p>
+      <p class="skills">{skills.join(' · ')}</p>
+      <p class="skills" style="margin-top:4px">{languages.join(' · ')}</p>
     </section>
 
     <footer>

@@ -15,7 +15,10 @@ export const identity = {
   x: '',
   linkedin: '',
   // TODO: real links
-  email: 'aswathas13@gmail.com',
+  email: 'aswathas@20.com',
+  phone: '+91 6382974762',
+  portfolio: 'https://hellokity.vercel.app/',
+  title: 'AI Developer',
   location: 'Chennai, India',
   tagline: 'I build across AI, Web3, finance, and security.',
   bio: 'Final-year CSE at SRMIST. I build across AI, Web3, finance, and security — clinical intelligence, on-chain forensics, cross-border payments, and the tooling around them.',
@@ -270,14 +273,32 @@ export const stats = {
   since: raw.projects.reduce((y, r) => Math.min(y, Number(r.createdAt.slice(0, 4))), 9999),
 };
 
-// TODO: add expected graduation year once confirmed.
 export const education: { school: string; degree: string; when: string; detail: string }[] = [
   {
     school: 'SRM Institute of Science and Technology, Kattankulathur',
-    degree: 'B.Tech — Computer Science and Engineering',
-    when: '4th year',
+    degree: 'B.Tech — Computer Science and Engineering, Blockchain specialisation',
+    when: '2023 — 2027',
     detail: '',
   },
+];
+
+// From the résumé. Checked by the user, not inferred.
+export const experience: { role: string; org: string; when: string; points: string[] }[] = [
+  {
+    role: 'Web3 Developer',
+    org: 'SISA Infosec',
+    when: 'Aug 2025 — present',
+    points: [
+      'Working on a Web3 security framework.',
+      'Simulation and testing of stablecoin workflows.',
+      'Web3 attack vectors — compliance, monitoring, and mitigation.',
+    ],
+  },
+];
+
+export const skills = [
+  'ReactJS', 'NextJS', 'TailwindCSS', 'FastAPI', 'PostgreSQL',
+  'Solidity', 'Hardhat', 'Web3', 'Agno', 'LangChain', 'Financial reporting',
 ];
 
 export type Post = {
