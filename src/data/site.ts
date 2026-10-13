@@ -201,6 +201,12 @@ export const projects: Project[] = [
     tags: ['TypeScript', 'study', 'reference'],
     kind: 'Study tool',
     status: 'Live',
+    gallery: [
+      { src: '/gallery/the-analyst-01-home.png', caption: 'Landing' },
+      { src: '/gallery/the-analyst-02-subjects-grid.png', caption: 'Six subjects' },
+      { src: '/gallery/the-analyst-03-data-science-analysis.png', caption: 'Topic heatmap' },
+      { src: '/gallery/the-analyst-04-exam-structure.png', caption: 'Exam structure' },
+    ],
     capabilities: [
       {
         title: 'Six subjects, one place',
@@ -258,6 +264,11 @@ export const projects: Project[] = [
     kind: 'Investigation dashboard',
     status: 'In development',
     runsOn: 'Node 18+, local Ollama',
+    gallery: [
+      { src: '/gallery/forensic-tool-01-home.png', caption: 'Landing' },
+      { src: '/gallery/forensic-tool-02-dashboard.png', caption: 'Dashboard' },
+      { src: '/gallery/forensic-tool-03-investigation.png', caption: 'Investigation' },
+    ],
     capabilities: [
       {
         title: 'Full pipeline in one command',
@@ -280,6 +291,14 @@ export const projects: Project[] = [
     kind: 'Payments platform',
     status: 'Hackathon build',
     runsOn: 'Web, Celo Alfajoes testnet',
+    gallery: [
+      { src: '/gallery/love-lace-01-home.png', caption: 'Landing' },
+      { src: '/gallery/love-lace-02-demo-story.png', caption: 'Demo walkthrough' },
+      { src: '/gallery/love-lace-03-transfer-widget.png', caption: 'Transfer widget' },
+      { src: '/gallery/love-lace-04-enter-amount.png', caption: 'Enter amount' },
+      { src: '/gallery/love-lace-05-confirm-transfer.png', caption: 'Confirm' },
+      { src: '/gallery/love-lace-06-transfer-complete.png', caption: 'Complete' },
+    ],
     capabilities: [
       {
         title: 'Cross-border without the correspondent',
