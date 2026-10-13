@@ -1,0 +1,37 @@
+---
+import Desktop from '../layouts/Desktop.astro';
+import { identity, stats } from '../data/site';
+
+const files = [
+  { href: '/resume.pdf', label: 'Résumé (PDF)', note: 'Generated from this site — one page, A4' },
+  { href: '/resume.txt', label: 'Résumé (plain text)', note: 'Same content, no layout' },
+  { href: '/llms.txt', label: 'llms.txt', note: 'Site index for language models and agents' },
+  { href: '/rss.xml', label: 'RSS feed', note: 'Writing' },
+  { href: '/search-index.json', label: 'search-index.json', note: 'Everything searchable in one file' },
+];
+---
+
+<Desktop title="Files" window="Files" path="/files/">
+  <h1>Files</h1>
+  <p class="lede">Everything this site will hand you directly.</p>
+
+  <table class="list">
+    <thead>
+      <tr><th scope="col">File</th><th scope="col">What it is</th></tr>
+    </thead>
+    <tbody>
+      {
+        files.map((f) => (
+          <tr>
+            <td><a href={f.href}>{f.label}</a></td>
+            <td class="date">{f.note}</td>
+          </tr>
+        ))
+      }
+    </tbody>
+  </table>
+
+  <p class="muted" style="margin-top:18px">
+    {stats.repos} repositories behind all of it · <a href={identity.github} rel="noreferrer">{identity.handle}</a>
+  </p>
+</Desktop>

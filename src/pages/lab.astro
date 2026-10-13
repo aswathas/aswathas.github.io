@@ -1,0 +1,29 @@
+---
+import Desktop from '../layouts/Desktop.astro';
+import { archive, identity } from '../data/site';
+---
+
+<Desktop title="Lab" window="Lab" path="/lab/">
+  <h1>Lab</h1>
+  <p class="lede">Small experiments and things that never became products.</p>
+
+  <ul class="cards">
+    {
+      archive.map((r) => (
+        <li>
+          <a class="card" href={r.url} rel="noreferrer">
+            <strong>{r.name}</strong>
+            <span>{r.description || `${r.language} experiment`}</span>
+            <span class="meta">
+              {r.language} · {r.pushedAt}
+            </span>
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+
+  <p style="margin-top:20px">
+    <a class="btn primary" href={identity.github} rel="noreferrer">More on GitHub ↗</a>
+  </p>
+</Desktop>

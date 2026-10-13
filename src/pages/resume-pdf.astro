@@ -1,0 +1,65 @@
+---
+import '../styles/print.css';
+import { identity, projects, education, languages, stats } from '../data/site';
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>{identity.name} — Résumé</title>
+    <meta name="robots" content="noindex" />
+  </head>
+  <body>
+    <header>
+      <img src="../media/me.jpg" alt="" />
+      <div>
+        <h1>{identity.name}</h1>
+        <p class="tagline">{identity.tagline}</p>
+        <p class="contact">
+          {identity.location} · {identity.handle} · <a href={`mailto:${identity.email}`}>{identity.email}</a> ·
+          <a href={identity.github}>github.com/{identity.handle}</a>
+        </p>
+      </div>
+    </header>
+
+    <section>
+      <h2>Education</h2>
+      {
+        education.map((e) => (
+          <div class="education">
+            <strong>{e.degree}</strong>
+            <div>
+              {e.school} — {e.when}
+            </div>
+          </div>
+        ))
+      }
+    </section>
+
+    <section>
+      <h2>Selected work</h2>
+      {
+        projects.map((p) => (
+          <div class="job">
+            <div class="row">
+              <strong>{p.name}</strong>
+              <span class="when">{p.language}</span>
+            </div>
+            <p>{p.description}</p>
+          </div>
+        ))
+      }
+    </section>
+
+    <section>
+      <h2>Skills</h2>
+      <p class="skills">{languages.join(' · ')}</p>
+    </section>
+
+    <footer>
+      {stats.repos} public repositories · {stats.languages} languages · building since {stats.since} ·
+      palash-style résumé generated from src/data/site.ts
+    </footer>
+  </body>
+</html>

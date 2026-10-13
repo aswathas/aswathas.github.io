@@ -278,12 +278,20 @@ select:focus-visible {
   overflow: auto;
   display: grid;
   grid-template-columns: 230px 1fr;
+  align-content: start;
 }
 
 .sidebar {
   border-right: 1px solid var(--hairline);
   background: var(--panel-bg);
   padding: 14px;
+}
+
+/* second rail: Elsewhere, stacked under the project list */
+.sidebar + .sidebar {
+  grid-column: 1;
+  grid-row: 2;
+  border-top: 1px solid var(--hairline);
 }
 
 .sidebar h2 {
@@ -325,6 +333,8 @@ select:focus-visible {
 /* ---------- main pane ---------- */
 
 .pane {
+  grid-column: 2;
+  grid-row: 1 / span 2;
   padding: clamp(16px, 3vw, 30px);
 }
 
@@ -1020,6 +1030,13 @@ select {
 
 /* ---------- mobile ---------- */
 
+@media (width <= 900px) {
+  .pane {
+    grid-column: 1 / -1;
+    grid-row: auto;
+  }
+}
+
 @media (width <= 700px) {
   body {
     height: auto;
@@ -1035,7 +1052,9 @@ select {
     grid-template-columns: 1fr;
   }
 
-  .sidebar {
+  .sidebar,
+  .sidebar + .sidebar {
+    grid-column: 1;
     border-right: 0;
     border-bottom: 1px solid var(--hairline);
   }
@@ -1170,4 +1189,68 @@ select {
   grid-column: 1;
   grid-row: 1 / span 3;
   border-radius: 7px;
+}
+
+.dock-item .tile img {
+  border-radius: 9px;
+  pointer-events: none;
+}
+
+.dock-item .tile.glyph {
+  font: 600 13px/1 var(--font-ui);
+  letter-spacing: 0.02em;
+}
+
+/* portrait */
+.portrait {
+  float: left;
+  width: 132px;
+  height: 132px;
+  margin: 0 22px 12px 0;
+  border-radius: 16px;
+  object-fit: cover;
+  /* Face sits near the top third of the original frame. */
+  object-position: center 38%;
+  border: 1px solid var(--hairline);
+}
+
+@media (width <= 520px) {
+  .portrait {
+    float: none;
+    margin: 0 0 14px;
+  }
+}
+
+/* two-column body with a right rail */
+.split {
+  display: grid;
+  gap: 26px;
+  align-items: start;
+  margin-top: 26px;
+}
+
+@media (width >= 900px) {
+  .split {
+    grid-template-columns: minmax(0, 1fr) 250px;
+  }
+}
+
+.rail {
+  padding: 14px;
+  border: 1px solid var(--hairline);
+  border-radius: 12px;
+  background: var(--panel-bg);
+}
+
+.rail h2:first-child {
+  margin-top: 0;
+}
+
+.rail-photo {
+  width: 100%;
+  height: 150px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  object-fit: cover;
+  object-position: center 38%;
 }

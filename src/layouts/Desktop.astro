@@ -98,17 +98,21 @@ const stats = [
           </div>
 
           <div class="content">
-            <nav class="sidebar" aria-label="Primary">
-              <h2>SIDEBAR</h2>
-              {nav.map((n) => (
-                <a href={n.href} aria-current={current === n.href ? 'page' : undefined}>{n.label}</a>
-              ))}
-              <h2>PROJECTS</h2>
-              {projects.slice(0, 6).map((p) => (
-                <a href={`/project/${p.slug}/`}>
+            <nav class="sidebar" aria-label="Projects">
+              <h2>APPLICATIONS</h2>
+              {projects.map((p) => (
+                <a href={`/project/${p.slug}/`} aria-current={current === `/project/${p.slug}/` ? 'page' : undefined}>
                   <img src={`/projects/${p.slug}.svg`} alt="" width="18" height="18" /> {p.name}
                 </a>
               ))}
+            </nav>
+
+            <nav class="sidebar" aria-label="Elsewhere">
+              <h2>ELSEWHERE</h2>
+              <a href={identity.github} rel="noreferrer">GitHub</a>
+              {identity.instagram && <a href={identity.instagram} rel="noreferrer">Instagram</a>}
+              <a href="/rss.xml">RSS</a>
+              <a href="/llms.txt">llms.txt</a>
             </nav>
 
             <main class="pane" id="main">
@@ -125,17 +129,28 @@ const stats = [
 
       <div class="dock-wrap">
         <ul class="dock">
-          {nav.map((n) => (
-            <li>
-              <a class="dock-item" href={n.href} title={n.label}>
-                <span class="tile" aria-hidden="true">{n.glyph}</span>
-                <span class="label">{n.label}</span>
-              </a>
-            </li>
-          ))}
+          {
+            nav.map((n) => (
+              <li>
+                <a
+                  class="dock-item"
+                  href={n.href}
+                  title={n.label}
+                  aria-current={current === n.href ? 'page' : undefined}
+                >
+                  <span class="tile" aria-hidden="true">
+                    <img src={`/projects/${n.icon}.svg`} alt="" width="34" height="34" />
+                  </span>
+                  <span class="label">{n.label}</span>
+                </a>
+              </li>
+            ))
+          }
           <li>
             <a class="dock-item" href={identity.github} rel="noreferrer" title="GitHub">
-              <span class="tile" aria-hidden="true">GH</span>
+              <span class="tile" aria-hidden="true">
+                <img src="/projects/github.svg" alt="" width="34" height="34" />
+              </span>
               <span class="label">GitHub</span>
             </a>
           </li>

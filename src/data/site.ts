@@ -303,11 +303,13 @@ export const posts: Post[] = [
   },
 ];
 
+// Dock order. `icon` names a file in public/projects/.
 export const nav = [
-  { label: 'Work', href: '/', glyph: '⌂' },
-  { label: 'Writing', href: '/blog/', glyph: '✎' },
-  { label: 'Résumé', href: '/resume/', glyph: '☰' },
-  { label: 'Media', href: '/media/', glyph: '▣' },
-  { label: 'Contact', href: '/contact/', glyph: '✉' },
-  { label: 'Search', href: '/search/', glyph: '⌕' },
+  { label: 'Work', href: '/', icon: 'files' },
+  { label: 'Lab', href: '/lab/', icon: 'lab' },
+  { label: 'Media', href: '/media/', icon: 'media' },
+  { label: 'Résumé', href: '/resume/', icon: 'resume' },
+  { label: 'Contact', href: '/contact/', icon: 'contact' },
+  { label: 'Search', href: '/search/', icon: 'search' },
+  { label: 'Writing', href: '/blog/', icon: 'writing' },
 ];

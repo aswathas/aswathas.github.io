@@ -98,3 +98,73 @@ for (const [slug, { from, to, mark }] of Object.entries(icons)) {
 }
 
 console.log(`wrote ${Object.keys(icons).length} icons -> public/projects/`);
+
+/* Dock items: the site's own pages, same idiom as the project plates. */
+const dock = {
+  files: {
+    from: '#5b6b8c',
+    to: '#8c9bb8',
+    mark: `<g fill="#fff" opacity=".95"><path d="M34 44a5 5 0 0 1 5-5h18l6 7h26a5 5 0 0 1 5 5v33a5 5 0 0 1-5 5H39a5 5 0 0 1-5-5Z"/></g>`,
+  },
+  lab: {
+    from: '#0f9d76',
+    to: '#37b98a',
+    mark: `<g fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M52 34v22L38 84a7 7 0 0 0 6 10h40a7 7 0 0 0 6-10L76 56V34"/>
+      <path d="M46 34h36"/><path d="M46 70h36" stroke-width="6"/></g>`,
+  },
+  media: {
+    from: '#a8387f',
+    to: '#e05c7a',
+    mark: `<g fill="none" stroke="#fff" stroke-width="7" stroke-linejoin="round">
+      <rect x="30" y="40" width="68" height="48" rx="8"/><path d="m38 78 16-18 12 13 10-11 14 16"/>
+      <circle cx="74" cy="54" r="5" fill="#fff" stroke="none"/></g>`,
+  },
+  resume: {
+    from: '#2c4fb8',
+    to: '#5b8def',
+    mark: `<g fill="#fff" opacity=".95"><rect x="40" y="30" width="48" height="68" rx="7"/>
+      </g><g fill="#2c4fb8"><rect x="50" y="42" width="28" height="5" rx="2.5"/>
+      <rect x="50" y="54" width="28" height="4" rx="2"/><rect x="50" y="64" width="18" height="4" rx="2"/></g>`,
+  },
+  contact: {
+    from: '#117f94',
+    to: '#4fc3d9',
+    mark: `<g fill="none" stroke="#fff" stroke-width="7" stroke-linejoin="round">
+      <rect x="26" y="44" width="76" height="48" rx="8"/><path d="m28 48 36 24 36-24"/></g>`,
+  },
+  search: {
+    from: '#3b6fe0',
+    to: '#7bb0f5',
+    mark: `<g fill="none" stroke="#fff" stroke-width="9" stroke-linecap="round">
+      <circle cx="56" cy="56" r="22"/><path d="m73 73 20 20"/></g>`,
+  },
+  writing: {
+    from: '#d8452f',
+    to: '#f0a929',
+    mark: `<g fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M36 88 78 46l16 16-42 42H36Z"/><path d="m70 54 16 16"/></g>`,
+  },
+  github: {
+    from: '#16181d',
+    to: '#3a3f4a',
+    mark: `<path d="M64 30a34 34 0 0 0-11 66c2 0 3-1 3-2v-9c-12 3-15-5-15-5-2-5-5-6-5-6-4-3 0-3 0-3 5 0 7 5 7 5 4 7 10 5 13 4 0-3 2-5 3-6-10-1-21-5-21-23 0-5 2-9 5-12-1-1-2-6 1-12 0 0 4-1 13 5a45 45 0 0 1 24 0c9-6 13-5 13-5 3 6 2 11 1 12 3 3 5 7 5 12 0 18-11 22-21 23 2 2 3 5 3 9v13c0 1 1 2 3 2A34 34 0 0 0 64 30Z" fill="#fff"/>`,
+  },
+};
+
+for (const [slug, { from, to, mark }] of Object.entries(dock)) {
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" role="img" aria-label="${slug}">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="${from}"/><stop offset="1" stop-color="${to}"/>
+    </linearGradient>
+  </defs>
+  <rect width="128" height="128" rx="28" fill="url(#g)"/>
+  <rect x="1" y="1" width="126" height="126" rx="27" fill="none" stroke="#fff" stroke-opacity=".18" stroke-width="2"/>
+  ${mark}
+</svg>
+`;
+  writeFileSync(join(out, `${slug}.svg`), svg);
+}
+
+console.log(`wrote ${Object.keys(dock).length} dock icons`);

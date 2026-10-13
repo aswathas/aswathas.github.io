@@ -4,6 +4,13 @@ import { identity, projects, posts, archive, languages, stats } from '../data/si
 ---
 
 <Desktop title={`${identity.name} — Software engineer`} window="Work" path="/">
+  <img
+    class="portrait"
+    src="/media/me.jpg"
+    alt={`${identity.name}, sitting on grass in a park`}
+    width="963"
+    height="1280"
+  />
   <h1>{identity.name}</h1>
   <p class="lede">{identity.tagline}</p>
   <p class="meta" style="margin:6px 0 0;color:var(--text-2);font-size:12px">{identity.location}</p>
@@ -42,22 +49,46 @@ import { identity, projects, posts, archive, languages, stats } from '../data/si
   <h2 style="margin-top:26px">LANGUAGES</h2>
   <p class="meta">{languages.join(' · ')}</p>
 
-  <h2 style="margin-top:26px">ARCHIVE</h2>
-  <table class="list">
-    <tbody>
-      {
-        archive.map((r) => (
-          <tr>
-            <td>
-              <a href={r.url} rel="noreferrer">{r.name}</a>
-              {r.description && <><br /><span class="meta">{r.description}</span></>}
-            </td>
-            <td class="date">{r.language} · {r.pushedAt}</td>
-          </tr>
-        ))
-      }
-    </tbody>
-  </table>
+  <div class="split">
+    <div>
+      <h2>ARCHIVE</h2>
+      <table class="list">
+        <tbody>
+          {
+            archive.map((r) => (
+              <tr>
+                <td>
+                  <a href={r.url} rel="noreferrer">{r.name}</a>
+                  {r.description && <><br /><span class="meta">{r.description}</span></>}
+                </td>
+                <td class="date">{r.language} · {r.pushedAt}</td>
+              </tr>
+            ))
+          }
+        </tbody>
+      </table>
+    </div>
+
+    <aside class="rail">
+      <h2>RÉSUMÉ</h2>
+      <img class="rail-photo" src="/media/me.jpg" alt={`${identity.name}, sitting on grass in a park`} width="963" height="1280" />
+      <p class="meta" style="margin:0 0 8px">
+        {identity.name} · {identity.location}<br />{identity.tagline}
+      </p>
+      <div class="buttons" style="margin:0">
+        <a class="btn primary" href="/resume.pdf" download>Download PDF</a>
+        <a class="btn" href="/resume.txt">Plain text</a>
+        <a class="btn" href="/resume/">Full résumé</a>
+      </div>
+      <h2 style="margin-top:18px">AT A GLANCE</h2>
+      <dl class="info">
+        <dt>Repos</dt><dd>{stats.repos}</dd>
+        <dt>Languages</dt><dd>{stats.languages}</dd>
+        <dt>Featured</dt><dd>{projects.length}</dd>
+        <dt>Since</dt><dd>{stats.since}</dd>
+      </dl>
+    </aside>
+  </div>
 
   <h2 style="margin-top:26px">RECENT WRITING</h2>
   <table class="list">
