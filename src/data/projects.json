@@ -1,7 +1,7 @@
 {
   "handle": "aswathas",
   "syncedAt": "2026-10-13",
-  "count": 26,
+  "count": 28,
   "projects": [
     {
       "name": "club-rank",
@@ -106,6 +106,19 @@
       "image": "https://opengraph.githubassets.com/edaeba4ef07031472c319ded7ae4673624f7b21cdd2574cab4f4f8873979b276/aswathas/axiom",
       "createdAt": "2026-10-07",
       "pushedAt": "2026-10-10"
+    },
+    {
+      "name": "ColdTrust-Hyperledger-Fabric-Smart-Contract",
+      "description": "",
+      "stars": 0,
+      "language": "TypeScript",
+      "url": "https://github.com/aswathas/ColdTrust-Hyperledger-Fabric-Smart-Contract",
+      "repo": "https://github.com/aswathas/ColdTrust-Hyperledger-Fabric-Smart-Contract",
+      "topics": [],
+      "license": null,
+      "image": "https://opengraph.githubassets.com/fbb30eb3359acd59173b76cf4b8fac7e98539c4c4b291b26ffe1a5ba9d092cd5/aswathas/ColdTrust-Hyperledger-Fabric-Smart-Contract",
+      "createdAt": "2026-08-21",
+      "pushedAt": "2026-08-21"
     },
     {
       "name": "second-brain-template",
@@ -325,6 +338,19 @@
       "image": "https://opengraph.githubassets.com/299f1882692661daef9379c46118f847167909e21a40bf511598ed8edd3a4b5d/aswathas/health-lovely",
       "createdAt": "2025-02-25",
       "pushedAt": "2025-05-04"
+    },
+    {
+      "name": "shrimp-git",
+      "description": "",
+      "stars": 0,
+      "language": "TypeScript",
+      "url": "https://github.com/aswathas/shrimp-git",
+      "repo": "https://github.com/aswathas/shrimp-git",
+      "topics": [],
+      "license": null,
+      "image": "https://opengraph.githubassets.com/a169f6eca63efe4e5797f181847d331c15cbdbaf549883aeadf2c93d173831c2/aswathas/shrimp-git",
+      "createdAt": "2025-03-10",
+      "pushedAt": "2025-03-14"
     },
     {
       "name": "borderpayment",

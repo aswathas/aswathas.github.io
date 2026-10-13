@@ -13,12 +13,16 @@ const out = join(dirname(fileURLToPath(import.meta.url)), '..', 'src', 'data', '
 // Noise: forks, scratch files, coursework dumps with nothing to show.
 const DENY = new Set([
   'test', 'testfor1', 'indirect', 'C-C---Projects', 'DSA', 'todo', 'frontend',
-  'shrimp-git', 'aiwebsite', 'lunggggg', 'web3-forensics-research',
+  'aiwebsite', 'lunggggg', 'web3-forensics-research',
   'executive-assistant', 'Aswath-Obsidian-Mountain-Den', 'adminabusesim_storyline-1',
 ]);
 
 // Named projects that carry no GitHub description but belong on the site.
-const ALLOW = new Set(['ForensicToolW3', 'health-lovely', 'Stripe-Stablecoin-', 'borderpayment', 'Safe_Passfortest']);
+const ALLOW = new Set([
+  'ForensicToolW3', 'health-lovely', 'Stripe-Stablecoin-', 'borderpayment',
+  'Safe_Passfortest', 'ColdTrust-Hyperledger-Fabric-Smart-Contract', 'shrimp-git',
+  'web3-forensics-research',
+]);
 
 const gh = (args) => JSON.parse(execFileSync('gh', args, { encoding: 'utf8', maxBuffer: 1 << 26 }));
 

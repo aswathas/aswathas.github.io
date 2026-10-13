@@ -168,3 +168,75 @@ for (const [slug, { from, to, mark }] of Object.entries(dock)) {
 }
 
 console.log(`wrote ${Object.keys(dock).length} dock icons`);
+const more = {
+  coldtrust: {
+    from: '#0b3d91',
+    to: '#1f7ae0',
+    // Snowflake over a chain link.
+    mark: `<g stroke="#fff" stroke-width="6" fill="none" stroke-linecap="round">
+      <path d="M64 34v60M40 49l48 30M88 49 40 79"/></g>
+      <g fill="#fff"><circle cx="64" cy="34" r="4"/><circle cx="64" cy="94" r="4"/>
+      <circle cx="40" cy="49" r="4"/><circle cx="88" cy="49" r="4"/>
+      <circle cx="40" cy="79" r="4"/><circle cx="88" cy="79" r="4"/></g>`,
+  },
+  'attack-logs': {
+    from: '#8f1d1d',
+    to: '#e0483a',
+    // Warning triangle over stacked log lines.
+    mark: `<path d="M64 28 100 90H28Z" fill="#fff" opacity=".95"/>
+      <rect x="60" y="52" width="8" height="20" rx="3" fill="#8f1d1d"/>
+      <circle cx="64" cy="80" r="4.5" fill="#8f1d1d"/>`,
+  },
+  'chain-trace': {
+    from: '#117f94',
+    to: '#2bb3c4',
+    // Three linked nodes tracing a path.
+    mark: `<g fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round">
+      <path d="M38 82 60 46l14 16 16-26"/></g>
+      <g fill="#fff"><circle cx="38" cy="82" r="9"/><circle cx="60" cy="46" r="9"/>
+      <circle cx="74" cy="62" r="9"/><circle cx="90" cy="36" r="9"/></g>`,
+  },
+  'evm-log-extractor': {
+    from: '#4a2c9e',
+    to: '#7b4ae0',
+    // Document with an extraction arrow.
+    mark: `<g fill="#fff" opacity=".95"><rect x="32" y="28" width="46" height="72" rx="7"/></g>
+      <g fill="#4a2c9e"><rect x="42" y="42" width="26" height="5" rx="2.5"/>
+      <rect x="42" y="54" width="26" height="5" rx="2.5"/><rect x="42" y="66" width="16" height="5" rx="2.5"/></g>
+      <path d="M84 78h22M96 68l10 10-10 10" stroke="#fff" stroke-width="7" fill="none"
+        stroke-linecap="round" stroke-linejoin="round"/>`,
+  },
+  'safe-pass': {
+    from: '#0f9d76',
+    to: '#2bb98a',
+    // Shield with a check.
+    mark: `<path d="M64 28 96 42v28c0 20-14 30-32 38-18-8-32-18-32-38V42Z" fill="#fff" opacity=".95"/>
+      <path d="m50 64 10 10 20-22" fill="none" stroke="#0f9d76" stroke-width="8"
+        stroke-linecap="round" stroke-linejoin="round"/>`,
+  },
+  'shrimp-ai': {
+    from: '#d8452f',
+    to: '#f0a929',
+    // Sensor wave over a droplet.
+    mark: `<path d="M64 30c14 18 22 28 22 40a22 22 0 1 1-44 0c0-12 8-22 22-40Z" fill="#fff" opacity=".95"/>
+      <g fill="none" stroke="#d8452f" stroke-width="6" stroke-linecap="round">
+      <path d="M48 62a16 16 0 0 0 0 16M80 62a16 16 0 0 1 0 16"/></g>`,
+  },
+};
+
+for (const [slug, { from, to, mark }] of Object.entries(more)) {
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" role="img" aria-label="${slug}">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="${from}"/><stop offset="1" stop-color="${to}"/>
+    </linearGradient>
+  </defs>
+  <rect width="128" height="128" rx="28" fill="url(#g)"/>
+  <rect x="1" y="1" width="126" height="126" rx="27" fill="none" stroke="#fff" stroke-opacity=".18" stroke-width="2"/>
+  ${mark}
+</svg>
+`;
+  writeFileSync(join(out, `${slug}.svg`), svg);
+}
+
+console.log(`wrote ${Object.keys(more).length} more icons`);

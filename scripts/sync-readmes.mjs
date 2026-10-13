@@ -23,6 +23,11 @@ const REPOS = {
   'block-auth': 'Safe_Passfortest',
   'agent-skills': 'agent-skills',
   'healthcare-tracker': 'health-lovely',
+  coldtrust: 'ColdTrust-Hyperledger-Fabric-Smart-Contract',
+  'attack-logs': 'AttackLogs',
+  'evm-log-extractor': 'evm-log-extractor',
+  'chain-trace': 'chaintrace',
+  'shrimp-ai': 'shrimp-git',
 };
 
 const gh = (args) =>

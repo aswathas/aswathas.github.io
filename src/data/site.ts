@@ -21,7 +21,9 @@ export const identity = {
   title: 'AI Developer',
   location: 'Chennai, India',
   tagline: 'I build across AI, Web3, finance, and security.',
-  bio: 'Final-year CSE at SRMIST. I build across AI, Web3, finance, and security — clinical intelligence, on-chain forensics, cross-border payments, and the tooling around them.',
+  // Profile paragraph, verbatim from the user's résumé.
+  bio: 'Computer Science undergraduate (final year, SRMIST) with hands-on full-stack experience in AI and Web3 development. Won multiple national-level hackathons and freelanced client projects. Comfortable analysing financial statements and key metrics.',
+  tagline: 'I build across AI, Web3, finance, and security.',
 };
 
 export type Project = {
@@ -72,6 +74,97 @@ export const projects: Project[] = [
       {
         title: 'Calibrated, not confident',
         body: 'Confidence is scored against what the record actually shows, so a hedged answer and a certain one look different.',
+      },
+    ],
+  },
+  {
+    name: 'ColdTrust',
+    slug: 'coldtrust',
+    description:
+      'Enterprise cold-chain traceability and smart-contract enforcement on Hyperledger Fabric 2.5 LTS. Go chaincode, Raft consensus, CouchDB world state, React 18 dashboard.',
+    language: 'TypeScript',
+    url: 'https://github.com/aswathas/ColdTrust-Hyperledger-Fabric-Smart-Contract',
+    tags: ['Hyperledger Fabric', 'Go', 'supply chain', 'React', 'CouchDB'],
+    kind: 'Supply-chain platform',
+    status: 'In development',
+    runsOn: 'Hyperledger Fabric 2.5, Kubernetes',
+    capabilities: [
+      {
+        title: 'Permissioned, not public',
+        body: 'Raft consensus and CouchDB world state mean only approved organisations write to the ledger, which is what a regulated cold chain actually needs.',
+      },
+      {
+        title: 'Enforcement, not just records',
+        body: 'Chaincode rejects a shipment that violates its policy instead of logging the violation after the fact.',
+      },
+      {
+        title: 'Verified, not asserted',
+        body: 'Eleven integration tests cover the whole path, so the claim is checkable rather than a badge.',
+      },
+    ],
+  },
+  {
+    name: 'AttackLogs',
+    slug: 'attack-logs',
+    description:
+      'EVM attack simulation dataset — 36 documented smart-contract exploits running on a local chain, producing forensic-grade NDJSON that matches a published schema.',
+    language: 'Solidity',
+    url: 'https://github.com/aswathas/AttackLogs',
+    tags: ['EVM', 'dataset', 'Solidity', 'Foundry', 'forensics'],
+    kind: 'Dataset',
+    status: 'Live',
+    runsOn: 'Local Anvil chain, Foundry',
+    capabilities: [
+      {
+        title: 'Ground truth, not scraped logs',
+        body: 'Every attack is a reproducible simulation with the source code and validation files beside it, so you know exactly which transactions are malicious.',
+      },
+      {
+        title: 'Built to benchmark against',
+        body: 'Train a detector or test a rule-based engine against known attack classes without touching mainnet.',
+      },
+    ],
+  },
+  {
+    name: 'ChainTrace',
+    slug: 'chain-trace',
+    description:
+      'Open-source, self-hostable multi-chain blockchain forensics. Trace stolen funds across chains.',
+    language: 'HTML',
+    url: 'https://github.com/aswathas/chaintrace',
+    tags: ['forensics', 'blockchain', 'self-hosted', 'security'],
+    kind: 'Forensics tool',
+    status: 'Live',
+    capabilities: [
+      {
+        title: 'Self-hosted on purpose',
+        body: 'Investigation data never leaves your infrastructure, which is usually the first requirement in this field.',
+      },
+      {
+        title: 'Follow the money, not the alert',
+        body: 'Start from a wallet and follow transfers across chains instead of reacting to a flagged transaction.',
+      },
+    ],
+  },
+  {
+    name: 'EVM Log Extractor',
+    slug: 'evm-log-extractor',
+    description:
+      'Forensics-grade EVM log extractor, normaliser, and decoder for any JSON-RPC endpoint. Checksummed addresses, wei as decimal strings, flat NDJSON.',
+    language: 'Python',
+    url: 'https://github.com/aswathas/evm-log-extractor',
+    tags: ['EVM', 'forensics', 'Python', 'NDJSON', 'Foundry'],
+    kind: 'CLI toolchain',
+    status: 'Live',
+    runsOn: 'Python 3, any EVM JSON-RPC endpoint',
+    capabilities: [
+      {
+        title: 'Three stages, each replayable',
+        body: 'Extract, normalise, decode. Each writes its own NDJSON, so a decode bug never means re-scanning a chain.',
+      },
+      {
+        title: 'Correct by construction',
+        body: 'EIP-55 checksummed addresses and wei as decimal strings — the two things that quietly corrupt downstream analysis.',
       },
     ],
   },
@@ -199,18 +292,22 @@ export const projects: Project[] = [
     ],
   },
   {
-    name: 'BlockAuth',
-    slug: slug('block-auth'),
-    description: 'Secure blockchain-based authentication system.',
+    name: 'SafePass',
+    slug: 'safe-pass',
+    description: 'A better alternative for OTP — one-time passwords anchored on-chain instead of a shared SMS gateway.',
     language: 'JavaScript',
     url: 'https://github.com/aswathas/Safe_Passfortest',
-    tags: ['auth', 'blockchain', 'security'],
+    tags: ['OTP', 'auth', 'blockchain', 'security'],
     kind: 'Authentication system',
     status: 'Prototype',
     capabilities: [
       {
-        title: 'Identity you can prove',
-        body: 'Authentication state anchored on-chain, so a compromised session store is not enough to impersonate you.',
+        title: 'The SMS code has a weak point',
+        body: 'One-time passwords over SMS are readable in transit and expensive to send. SafePass anchors the challenge on-chain instead.',
+      },
+      {
+        title: 'Replay stops mattering',
+        body: 'Because the challenge is a chain state, using it twice is visibly wrong rather than silently accepted.',
       },
     ],
   },
