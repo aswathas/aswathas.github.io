@@ -1,16 +1,29 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" role="img" aria-label="file-text">
   <defs>
-    <linearGradient id="g" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#2c4fb8"/><stop offset="1" stop-color="#5b8def"/>
+    <linearGradient id="g" x1="0" y1="0" x2="0.15" y2="1">
+      <stop offset="0" stop-color="#2c4fb8"/>
+      <stop offset=".55" stop-color="#4671d6"/>
+      <stop offset="1" stop-color="#5b8def"/>
     </linearGradient>
-    <linearGradient id="sheen" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#fff" stop-opacity=".2"/>
-      <stop offset=".55" stop-color="#fff" stop-opacity="0"/>
+    <linearGradient id="gloss" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fff" stop-opacity=".34"/>
+      <stop offset=".48" stop-color="#fff" stop-opacity=".06"/>
+      <stop offset=".5" stop-color="#fff" stop-opacity="0"/>
     </linearGradient>
+    <linearGradient id="edge" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fff" stop-opacity=".30"/>
+      <stop offset=".6" stop-color="#fff" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000" stop-opacity=".14"/>
+    </linearGradient>
+    <clipPath id="c"><path d="M127.50 64.00L127.45 85.33L127.28 92.12L127.01 97.03L126.63 100.98L126.13 104.33L125.52 107.24L124.79 109.82L123.95 112.12L122.98 114.20L121.88 116.07L120.65 117.76L119.28 119.28L117.76 120.65L116.07 121.88L114.20 122.98L112.12 123.95L109.82 124.79L107.24 125.52L104.33 126.13L100.98 126.63L97.03 127.01L92.12 127.28L85.33 127.45L64.00 127.50L42.67 127.45L35.88 127.28L30.97 127.01L27.02 126.63L23.67 126.13L20.76 125.52L18.18 124.79L15.88 123.95L13.80 122.98L11.93 121.88L10.24 120.65L8.72 119.28L7.35 117.76L6.12 116.07L5.02 114.20L4.05 112.12L3.21 109.82L2.48 107.24L1.87 104.33L1.37 100.98L0.99 97.03L0.72 92.12L0.55 85.33L0.50 64.00L0.55 42.67L0.72 35.88L0.99 30.97L1.37 27.02L1.87 23.67L2.48 20.76L3.21 18.18L4.05 15.88L5.02 13.80L6.12 11.93L7.35 10.24L8.72 8.72L10.24 7.35L11.93 6.12L13.80 5.02L15.88 4.05L18.18 3.21L20.76 2.48L23.67 1.87L27.02 1.37L30.97 0.99L35.88 0.72L42.67 0.55L64.00 0.50L85.33 0.55L92.12 0.72L97.03 0.99L100.98 1.37L104.33 1.87L107.24 2.48L109.82 3.21L112.12 4.05L114.20 5.02L116.07 6.12L117.76 7.35L119.28 8.72L120.65 10.24L121.88 11.93L122.98 13.80L123.95 15.88L124.79 18.18L125.52 20.76L126.13 23.67L126.63 27.02L127.01 30.97L127.28 35.88L127.45 42.67L127.50 64.00Z"/></clipPath>
   </defs>
-  <rect width="128" height="128" rx="28" fill="url(#g)"/>
-  <rect width="128" height="64" rx="28" fill="url(#sheen)"/>
-  <rect x="1" y="1" width="126" height="126" rx="27" fill="none" stroke="#fff" stroke-opacity=".2" stroke-width="2"/>
-  <g transform="translate(33 33) scale(2.5833333333333335)" fill="none" stroke="#fff"
-     stroke-linecap="round" stroke-linejoin="round" opacity=".95"><!-- @license lucide-static v1.56.0 - ISC --> <path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z" /> <path d="M14 2v5a1 1 0 0 0 1 1h5" /> <path d="M10 9H8" /> <path d="M16 13H8" /> <path d="M16 17H8" /></g>
+  <g clip-path="url(#c)">
+    <rect width="128" height="128" fill="url(#g)"/>
+    <rect width="128" height="74" fill="url(#gloss)"/>
+    <rect width="128" height="128" fill="url(#edge)"/>
+  </g>
+  <path d="M127.50 64.00L127.45 85.33L127.28 92.12L127.01 97.03L126.63 100.98L126.13 104.33L125.52 107.24L124.79 109.82L123.95 112.12L122.98 114.20L121.88 116.07L120.65 117.76L119.28 119.28L117.76 120.65L116.07 121.88L114.20 122.98L112.12 123.95L109.82 124.79L107.24 125.52L104.33 126.13L100.98 126.63L97.03 127.01L92.12 127.28L85.33 127.45L64.00 127.50L42.67 127.45L35.88 127.28L30.97 127.01L27.02 126.63L23.67 126.13L20.76 125.52L18.18 124.79L15.88 123.95L13.80 122.98L11.93 121.88L10.24 120.65L8.72 119.28L7.35 117.76L6.12 116.07L5.02 114.20L4.05 112.12L3.21 109.82L2.48 107.24L1.87 104.33L1.37 100.98L0.99 97.03L0.72 92.12L0.55 85.33L0.50 64.00L0.55 42.67L0.72 35.88L0.99 30.97L1.37 27.02L1.87 23.67L2.48 20.76L3.21 18.18L4.05 15.88L5.02 13.80L6.12 11.93L7.35 10.24L8.72 8.72L10.24 7.35L11.93 6.12L13.80 5.02L15.88 4.05L18.18 3.21L20.76 2.48L23.67 1.87L27.02 1.37L30.97 0.99L35.88 0.72L42.67 0.55L64.00 0.50L85.33 0.55L92.12 0.72L97.03 0.99L100.98 1.37L104.33 1.87L107.24 2.48L109.82 3.21L112.12 4.05L114.20 5.02L116.07 6.12L117.76 7.35L119.28 8.72L120.65 10.24L121.88 11.93L122.98 13.80L123.95 15.88L124.79 18.18L125.52 20.76L126.13 23.67L126.63 27.02L127.01 30.97L127.28 35.88L127.45 42.67L127.50 64.00Z" fill="none" stroke="#fff" stroke-opacity=".16" stroke-width="1.5"/>
+  <g transform="translate(37 37) scale(2.25)" fill="none" stroke="#fff"
+     stroke-linecap="round" stroke-linejoin="round" opacity=".96"
+     style="filter:drop-shadow(0 1px 1.5px rgba(0,0,0,.28))"><!-- @license lucide-static v1.56.0 - ISC --> <path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z" /> <path d="M14 2v5a1 1 0 0 0 1 1h5" /> <path d="M10 9H8" /> <path d="M16 13H8" /> <path d="M16 17H8" /></g>
 </svg>

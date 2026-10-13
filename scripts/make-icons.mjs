@@ -26,29 +26,75 @@ const glyph = (name) =>
     .replace(/\s+/g, ' ')
     .trim();
 
-const plate = ({ from, to, icon, size = 62 }) => {
+/**
+ * Apple's continuous-corner outline is a superellipse, not a rounded rect.
+ * Sampling |x/a|^n + |y/b|^n = 1 with n≈5 gives a path that matches the
+ * platform's own icon silhouette instead of approximating it.
+ */
+const squircle = (size, n = 5, steps = 96) => {
+  const a = size / 2 - 0.5;
+  const c = size / 2;
+  const pts = [];
+  for (let i = 0; i <= steps; i++) {
+    const t = (i / steps) * Math.PI * 2;
+    const cos = Math.cos(t);
+    const sin = Math.sin(t);
+    pts.push([
+      c + a * Math.sign(cos) * Math.abs(cos) ** (2 / n),
+      c + a * Math.sign(sin) * Math.abs(sin) ** (2 / n),
+    ]);
+  }
+  return (
+    pts.map(([x, y], i) => `${i ? 'L' : 'M'}${x.toFixed(2)} ${y.toFixed(2)}`).join('') + 'Z'
+  );
+};
+
+const OUTLINE = squircle(128);
+
+const plate = ({ from, to, icon, size = 54 }) => {
   const inset = (128 - size) / 2;
   const scale = size / 24;
-  // Lucide strokes at width 2 on a 24 grid; keep the same optical weight.
-  const body = glyph(icon).replace(/stroke-width="2"/g, `stroke-width="${(2 / scale).toFixed(2)}"`);
+  const body = glyph(icon).replace(/stroke-width="2"/g, `stroke-width="${(2.35 / scale).toFixed(2)}"`);
   return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" role="img" aria-label="${icon}">
   <defs>
-    <linearGradient id="g" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="${from}"/><stop offset="1" stop-color="${to}"/>
+    <linearGradient id="g" x1="0" y1="0" x2="0.15" y2="1">
+      <stop offset="0" stop-color="${from}"/>
+      <stop offset=".55" stop-color="${mix(from, to, 0.55)}"/>
+      <stop offset="1" stop-color="${to}"/>
     </linearGradient>
-    <linearGradient id="sheen" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#fff" stop-opacity=".2"/>
-      <stop offset=".55" stop-color="#fff" stop-opacity="0"/>
+    <linearGradient id="gloss" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fff" stop-opacity=".34"/>
+      <stop offset=".48" stop-color="#fff" stop-opacity=".06"/>
+      <stop offset=".5" stop-color="#fff" stop-opacity="0"/>
     </linearGradient>
+    <linearGradient id="edge" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fff" stop-opacity=".30"/>
+      <stop offset=".6" stop-color="#fff" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000" stop-opacity=".14"/>
+    </linearGradient>
+    <clipPath id="c"><path d="${OUTLINE}"/></clipPath>
   </defs>
-  <rect width="128" height="128" rx="28" fill="url(#g)"/>
-  <rect width="128" height="64" rx="28" fill="url(#sheen)"/>
-  <rect x="1" y="1" width="126" height="126" rx="27" fill="none" stroke="#fff" stroke-opacity=".2" stroke-width="2"/>
+  <g clip-path="url(#c)">
+    <rect width="128" height="128" fill="url(#g)"/>
+    <rect width="128" height="74" fill="url(#gloss)"/>
+    <rect width="128" height="128" fill="url(#edge)"/>
+  </g>
+  <path d="${OUTLINE}" fill="none" stroke="#fff" stroke-opacity=".16" stroke-width="1.5"/>
   <g transform="translate(${inset} ${inset}) scale(${scale})" fill="none" stroke="#fff"
-     stroke-linecap="round" stroke-linejoin="round" opacity=".95">${body}</g>
+     stroke-linecap="round" stroke-linejoin="round" opacity=".96"
+     style="filter:drop-shadow(0 1px 1.5px rgba(0,0,0,.28))">${body}</g>
 </svg>
 `;
 };
+
+/** Blend two hex colours; used for the mid stop of the plate gradient. */
+function mix(a, b, t) {
+  const p = (h) => [1, 3, 5].map((i) => parseInt(h.slice(i, i + 2), 16));
+  const [r1, g1, b1] = p(a);
+  const [r2, g2, b2] = p(b);
+  const c = (x, y) => Math.round(x + (y - x) * t).toString(16).padStart(2, '0');
+  return `#${c(r1, r2)}${c(g1, g2)}${c(b1, b2)}`;
+}
 
 const apps = {
   axiom: { from: '#3b6fe0', to: '#7b4ae0', icon: 'shield-check' },
