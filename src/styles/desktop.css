@@ -308,16 +308,14 @@ select:focus-visible {
 }
 
 .sidebar {
-  /* Stays put while the main pane scrolls, otherwise the rail scrolls away
-     and leaves a void beside the content. */
+  /* Stays put while the main pane scrolls. No max-height: the rail is short
+     enough to sit whole, and scrolling it was costing a scrollbar for nothing. */
   position: sticky;
   top: 0;
   align-self: start;
-  max-height: 100%;
   border-right: 1px solid var(--hairline);
   background: var(--panel-bg);
   padding: 14px;
-  overflow-y: auto;
 }
 
 /* One row per application, matching the reference sidebar. */
