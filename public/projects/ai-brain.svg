@@ -1,12 +1,16 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" role="img" aria-label="ai-brain">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" role="img" aria-label="brain">
   <defs>
     <linearGradient id="g" x1="0" y1="0" x2="0" y2="1">
       <stop offset="0" stop-color="#c2417a"/><stop offset="1" stop-color="#6d4ae0"/>
     </linearGradient>
+    <linearGradient id="sheen" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fff" stop-opacity=".2"/>
+      <stop offset=".55" stop-color="#fff" stop-opacity="0"/>
+    </linearGradient>
   </defs>
   <rect width="128" height="128" rx="28" fill="url(#g)"/>
-  <rect x="1" y="1" width="126" height="126" rx="27" fill="none" stroke="#fff" stroke-opacity=".18" stroke-width="2"/>
-  <g stroke="#fff" stroke-width="5" fill="none">
-      <path d="M44 50 64 40l20 10M44 50l-6 22m46-22 6 22M44 50h40" stroke-linecap="round"/>
-      </g><g fill="#fff"><circle cx="44" cy="50" r="9"/><circle cx="64" cy="40" r="9"/><circle cx="84" cy="50" r="9"/><circle cx="38" cy="74" r="8"/><circle cx="90" cy="74" r="8"/></g>
+  <rect width="128" height="64" rx="28" fill="url(#sheen)"/>
+  <rect x="1" y="1" width="126" height="126" rx="27" fill="none" stroke="#fff" stroke-opacity=".2" stroke-width="2"/>
+  <g transform="translate(33 33) scale(2.5833333333333335)" fill="none" stroke="#fff"
+     stroke-linecap="round" stroke-linejoin="round" opacity=".95"><!-- @license lucide-static v1.56.0 - ISC --> <path d="M12 18V5" /> <path d="M15 13a4.17 4.17 0 0 1-3-4 4.17 4.17 0 0 1-3 4" /> <path d="M17.598 6.5A3 3 0 1 0 12 5a3 3 0 1 0-5.598 1.5" /> <path d="M17.997 5.125a4 4 0 0 1 2.526 5.77" /> <path d="M18 18a4 4 0 0 0 2-7.464" /> <path d="M19.967 17.483A4 4 0 1 1 12 18a4 4 0 1 1-7.967-.517" /> <path d="M6 18a4 4 0 0 1-2-7.464" /> <path d="M6.003 5.125a4 4 0 0 0-2.526 5.77" /></g>
 </svg>

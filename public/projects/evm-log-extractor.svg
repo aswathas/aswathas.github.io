@@ -1,14 +1,16 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" role="img" aria-label="evm-log-extractor">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" role="img" aria-label="scroll-text">
   <defs>
     <linearGradient id="g" x1="0" y1="0" x2="0" y2="1">
       <stop offset="0" stop-color="#4a2c9e"/><stop offset="1" stop-color="#7b4ae0"/>
     </linearGradient>
+    <linearGradient id="sheen" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fff" stop-opacity=".2"/>
+      <stop offset=".55" stop-color="#fff" stop-opacity="0"/>
+    </linearGradient>
   </defs>
   <rect width="128" height="128" rx="28" fill="url(#g)"/>
-  <rect x="1" y="1" width="126" height="126" rx="27" fill="none" stroke="#fff" stroke-opacity=".18" stroke-width="2"/>
-  <g fill="#fff" opacity=".95"><rect x="32" y="28" width="46" height="72" rx="7"/></g>
-      <g fill="#4a2c9e"><rect x="42" y="42" width="26" height="5" rx="2.5"/>
-      <rect x="42" y="54" width="26" height="5" rx="2.5"/><rect x="42" y="66" width="16" height="5" rx="2.5"/></g>
-      <path d="M84 78h22M96 68l10 10-10 10" stroke="#fff" stroke-width="7" fill="none"
-        stroke-linecap="round" stroke-linejoin="round"/>
+  <rect width="128" height="64" rx="28" fill="url(#sheen)"/>
+  <rect x="1" y="1" width="126" height="126" rx="27" fill="none" stroke="#fff" stroke-opacity=".2" stroke-width="2"/>
+  <g transform="translate(33 33) scale(2.5833333333333335)" fill="none" stroke="#fff"
+     stroke-linecap="round" stroke-linejoin="round" opacity=".95"><!-- @license lucide-static v1.56.0 - ISC --> <path d="M15 12h-5" /> <path d="M15 8h-5" /> <path d="M19 17V5a2 2 0 0 0-2-2H4" /> <path d="M8 21h12a2 2 0 0 0 2-2v-1a1 1 0 0 0-1-1H11a1 1 0 0 0-1 1v1a2 2 0 1 1-4 0V5a2 2 0 1 0-4 0v2a1 1 0 0 0 1 1h3" /></g>
 </svg>
