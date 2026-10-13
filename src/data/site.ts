@@ -7,9 +7,13 @@
 import raw from './projects.json';
 
 export const identity = {
-  name: 'Aswath S', // TODO: real name
+  name: 'Aswath AS',
   handle: 'aswathas',
   github: 'https://github.com/aswathas',
+  instagram: 'https://instagram.com/aswath_ig',
+  // TODO: other links — do not guess these
+  x: '',
+  linkedin: '',
   // TODO: real links
   email: 'aswathas13@gmail.com',
   location: 'India',

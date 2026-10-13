@@ -10,6 +10,9 @@ import { identity } from '../data/site';
     <tbody>
       <tr><td>Email</td><td class="date"><a href={`mailto:${identity.email}`}>{identity.email}</a></td></tr>
       <tr><td>GitHub</td><td class="date"><a href={identity.github} rel="noreferrer">{identity.handle}</a></td></tr>
+      {identity.instagram && <tr><td>Instagram</td><td class="date"><a href={identity.instagram} rel="noreferrer">@aswath_ig</a></td></tr>}
+      {identity.x && <tr><td>X</td><td class="date"><a href={identity.x} rel="noreferrer">@aswath_ig</a></td></tr>}
+      {identity.linkedin && <tr><td>LinkedIn</td><td class="date"><a href={identity.linkedin} rel="noreferrer">Profile</a></td></tr>}
       <tr><td>Writing feed</td><td class="date"><a href="/rss.xml">RSS</a></td></tr>
       <tr><td>For agents</td><td class="date"><a href="/llms.txt">llms.txt</a></td></tr>
     </tbody>

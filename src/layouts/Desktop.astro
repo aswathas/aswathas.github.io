@@ -34,7 +34,7 @@ const stats = [
       name: identity.name,
       alternateName: [identity.handle],
       url: Astro.site?.href ?? 'https://example.com/',
-      sameAs: [identity.github],
+      sameAs: [identity.github, identity.instagram, identity.x].filter(Boolean),
     })} />
   </head>
   <body>
