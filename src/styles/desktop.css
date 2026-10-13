@@ -1174,14 +1174,15 @@ select {
   border-radius: 4px;
 }
 
-.card {
+/* Only cards that carry an icon get the two-column grid. */
+.card:has(.card-icon) {
   grid-template-columns: auto 1fr;
   align-items: start;
   column-gap: 10px;
 }
 
-.card > strong,
-.card > span:not(.meta) {
+.card:has(.card-icon) > strong,
+.card:has(.card-icon) > span:not(.meta) {
   grid-column: 2;
 }
 
@@ -1253,4 +1254,54 @@ select {
   border-radius: 8px;
   object-fit: cover;
   object-position: center 38%;
+}
+
+/* window controls */
+.traffic .light {
+  width: 12px;
+  height: 12px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  cursor: pointer;
+  color: #00000070;
+  font: 700 9px/12px var(--font-ui);
+  box-shadow: inset 0 1px 1px #ffffff40, inset 0 -1px 1px #00000030;
+}
+
+.traffic .light:hover span {
+  opacity: 1;
+}
+
+.traffic .light span {
+  opacity: 0;
+}
+
+.traffic .close { background: var(--traffic-close); }
+.traffic .minimize { background: var(--traffic-min); }
+.traffic .zoom { background: var(--traffic-zoom); }
+
+.traffic .close:hover { background: #ff4b40; }
+.traffic .minimize:hover { background: #fea934; }
+.traffic .zoom:hover { background: #1fc02f; }
+
+/* zoomed: the window fills the desktop */
+.window.zoomed {
+  width: 100%;
+  max-width: none;
+  border-radius: 0;
+  border-width: 0;
+}
+
+/* minimized: the window is stowed, the dock shows what is running */
+.desk.minimized .stage {
+  display: none;
+}
+
+.desk.minimized .dock-item[data-running] .tile {
+  box-shadow: 0 0 0 2px var(--accent);
+}
+
+.desk.minimized .dock-item .label {
+  opacity: 1;
 }
