@@ -320,10 +320,8 @@ select:focus-visible {
   overflow-y: auto;
 }
 
+/* One row per application, matching the reference sidebar. */
 .app-tiles {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 4px;
   padding: 0;
   margin: 0;
   list-style: none;
@@ -333,12 +331,11 @@ select:focus-visible {
   display: grid;
   grid-template-columns: auto minmax(0, 1fr);
   align-items: center;
-  gap: 6px;
-  padding: 4px 6px;
+  gap: 8px;
+  padding: 5px 8px;
   border-radius: 7px;
   color: inherit;
   text-decoration: none;
-  font-size: 11px;
 }
 
 .app-tiles a:hover,
@@ -349,6 +346,17 @@ select:focus-visible {
 
 .app-tiles img {
   border-radius: 6px;
+}
+
+@media (height < 620px) {
+  .app-tiles a {
+    padding: 3px 8px;
+  }
+
+  .app-tiles img {
+    width: 18px;
+    height: 18px;
+  }
 }
 
 .app-tiles span {
