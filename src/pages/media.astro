@@ -1,0 +1,21 @@
+---
+import Desktop from '../layouts/Desktop.astro';
+import { projects } from '../data/site';
+---
+
+<Desktop title="Media" window="Media" path="/media/">
+  <h1>Media</h1>
+  <p class="lede">Project homepages.</p>
+  <ul class="cards">
+    {
+      projects.map((p) => (
+        <li>
+          <a class="card" href={p.url} rel="noreferrer">
+            <strong>{p.name}</strong>
+            <span class="meta">{p.url}</span>
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</Desktop>

@@ -1,0 +1,89 @@
+---
+import Desktop from '../layouts/Desktop.astro';
+import { identity, projects, posts, archive, languages, stats } from '../data/site';
+---
+
+<Desktop title={`${identity.name} — Software engineer`} window="Work" path="/">
+  <h1>{identity.name}</h1>
+  <p class="lede">{identity.tagline}</p>
+
+  <div class="buttons">
+    <a class="btn primary" href="/contact/">Get in Touch</a>
+    <a class="btn" href="/resume/">Résumé</a>
+    <a class="btn" href={identity.github} rel="noreferrer">GitHub ↗</a>
+  </div>
+
+  <ul class="stats">
+    <li><b>{stats.repos}</b><span>Public repos</span></li>
+    <li><b>{stats.languages}</b><span>Languages used</span></li>
+    <li><b>{stats.since}</b><span>Building since</span></li>
+  </ul>
+
+  <h2>APPLICATIONS</h2>
+  <ul class="cards">
+    {
+      projects.map((p) => (
+        <li>
+          <a class="card" href={p.url} rel="noreferrer">
+            <strong>{p.name}</strong>
+            <span>{p.description}</span>
+            <span class="meta">
+              {p.language} · <span data-repo={p.repos?.[0] ?? p.name}>—</span>
+              {p.repos && <span> · +{p.repos.length - 1} more repos</span>}
+            </span>
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+
+  <h2 style="margin-top:26px">LANGUAGES</h2>
+  <p class="meta">{languages.join(' · ')}</p>
+
+  <h2 style="margin-top:26px">ARCHIVE</h2>
+  <table class="list">
+    <tbody>
+      {
+        archive.map((r) => (
+          <tr>
+            <td>
+              <a href={r.url} rel="noreferrer">{r.name}</a>
+              {r.description && <><br /><span class="meta">{r.description}</span></>}
+            </td>
+            <td class="date">{r.language} · {r.pushedAt}</td>
+          </tr>
+        ))
+      }
+    </tbody>
+  </table>
+
+  <h2 style="margin-top:26px">RECENT WRITING</h2>
+  <table class="list">
+    <thead><tr><th>Name</th><th>Date</th></tr></thead>
+    <tbody>
+      {
+        posts.map((p) => (
+          <tr>
+            <td><a href={`/blog/${p.slug}/`}>{p.title}</a><br /><span class="meta">{p.summary}</span></td>
+            <td class="date">{p.date}</td>
+          </tr>
+        ))
+      }
+    </tbody>
+  </table>
+
+  <script>
+    // Per-project star counts come from the edge function, not the build.
+    fetch('/api/live.json', { signal: AbortSignal.timeout(8000) })
+      .then((r) => (r.ok ? r.json() : Promise.reject(new Error(String(r.status)))))
+      .then((d) => {
+        for (const [repo, v] of Object.entries(d.projects ?? {})) {
+          const el = document.querySelector(`[data-repo="${repo}"]`);
+          if (el) el.textContent = `${v.stars.toLocaleString('en-US')} stars`;
+        }
+      })
+      .catch(() => {
+        for (const el of document.querySelectorAll('[data-repo]')) el.textContent = 'stars unavailable';
+      });
+  </script>
+</Desktop>

@@ -1,0 +1,219 @@
+---
+import '../styles/desktop.css';
+import { identity, projects, posts, nav } from '../data/site';
+
+type Props = { title: string; window?: string; path?: string };
+const { title, window: win = title, path = '/', current = Astro.url.pathname } =
+  Astro.props as Props & { current?: string };
+
+const stats = [
+  { label: 'GitHub stars', id: 'stars' },
+  { label: 'Repos', id: 'repos' },
+  { label: 'Apps shipped', id: 'apps' },
+];
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={identity.tagline} />
+    <meta name="author" content={identity.name} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="alternate" type="application/rss+xml" title={`${identity.name} — Writing`} href="/rss.xml" />
+    <link rel="alternate" type="text/markdown" title="Site index for agents" href="/llms.txt" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={identity.tagline} />
+    <meta property="og:url" content={Astro.url.href} />
+    <meta property="og:type" content="website" />
+    <script type="application/ld+json" set:html={JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'Person',
+      name: identity.name,
+      alternateName: [identity.handle],
+      url: Astro.site?.href ?? 'https://example.com/',
+      sameAs: [identity.github],
+    })} />
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+
+    <div class="desk">
+      <header class="menubar">
+        <span class="apple" aria-hidden="true">●</span>
+        <strong class="brand">{win}</strong>
+
+        <details class="menu">
+          <summary>Go</summary>
+          <div class="sheet">
+            <h2>WHERE</h2>
+            {nav.map((n) => <a href={n.href}>{n.label}</a>)}
+          </div>
+        </details>
+
+        <details class="menu">
+          <summary>Applications</summary>
+          <div class="sheet">
+            <h2>APPLICATIONS</h2>
+            {projects.slice(0, 8).map((p) => <a href={p.url} rel="noreferrer">{p.name}</a>)}
+          </div>
+        </details>
+
+        <details class="menu">
+          <summary>Window</summary>
+          <div class="sheet">
+            <h2>WINDOW</h2>
+            <a href="#main">Focus</a>
+            <a href="/search/">Search everything</a>
+          </div>
+        </details>
+
+        <details class="menu">
+          <summary>Help</summary>
+          <div class="sheet">
+            <h2>SHORTCUTS</h2>
+            <a href="/search/">Search</a>
+            <a href="/llms.txt">llms.txt</a>
+          </div>
+        </details>
+
+        <span class="spacer"></span>
+        <span class="clock" data-clock></span>
+      </header>
+
+      <div class="stage">
+        <div class="window">
+          <div class="titlebar">
+            <span class="traffic" aria-hidden="true"><i></i><i></i><i></i></span>
+            <span class="title">{win}</span>
+            <nav class="breadcrumb" aria-label="Path" style="font-size:11px;color:var(--text-2)">{path}</nav>
+          </div>
+
+          <div class="content">
+            <nav class="sidebar" aria-label="Primary">
+              <h2>SIDEBAR</h2>
+              {nav.map((n) => (
+                <a href={n.href} aria-current={current === n.href ? 'page' : undefined}>{n.label}</a>
+              ))}
+              <h2>PROJECTS</h2>
+              {projects.slice(0, 6).map((p) => <a href={p.url} rel="noreferrer">{p.name}</a>)}
+            </nav>
+
+            <main class="pane" id="main">
+              <slot />
+            </main>
+          </div>
+
+          <div class="statusbar">
+            <span>{path}</span>
+            <span>{projects.length} applications, {posts.length} articles</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="dock-wrap">
+        <ul class="dock">
+          {nav.map((n) => (
+            <li>
+              <a class="dock-item" href={n.href} title={n.label}>
+                <span class="tile" aria-hidden="true">{n.glyph}</span>
+                <span class="label">{n.label}</span>
+              </a>
+            </li>
+          ))}
+          <li>
+            <a class="dock-item" href={identity.github} rel="noreferrer" title="GitHub">
+              <span class="tile" aria-hidden="true">GH</span>
+              <span class="label">GitHub</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <script>
+      // Menus: close siblings, close on outside click, Esc, and ⌘/Ctrl+1..5.
+      const bar = document.querySelector<HTMLElement>('.menubar')!;
+      const menus = [...bar.querySelectorAll<HTMLDetailsElement>('details.menu')];
+      const closeOthers = (keep?: HTMLDetailsElement) =>
+        menus.forEach((m) => { if (m !== keep) m.open = false; });
+
+      for (const m of menus) {
+        m.addEventListener('toggle', () => { if (m.open) closeOthers(m); });
+      }
+      document.addEventListener('pointerdown', (e) => {
+        if (!(e.target instanceof Node) || !bar.contains(e.target)) closeOthers();
+      });
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          const open = menus.find((m) => m.open);
+          open?.removeAttribute('open');
+          open?.querySelector('summary')?.focus();
+        }
+        if ((e.metaKey || e.ctrlKey) && !e.altKey && !e.shiftKey) {
+          const href = { '1': '/', '2': '/blog/', '3': '/resume/', '4': '/contact/', '5': '/search/' }[
+            e.key.toLowerCase()
+          ];
+          if (href) { e.preventDefault(); location.href = href; }
+        }
+      });
+
+      // Clock.
+      const clock = document.querySelector<HTMLElement>('[data-clock]')!;
+      const tick = () => {
+        clock.textContent = new Date()
+          .toLocaleString('en-US', { weekday: 'short', hour: 'numeric', minute: '2-digit' })
+          .replace(',', '');
+      };
+      tick();
+      setInterval(tick, 20_000);
+    </script>
+
+    <script>
+      // Dock magnification: cosine falloff around the pointer, rAF-batched.
+      const dock = document.querySelector<HTMLElement>('.dock')!;
+      const items = [...dock.querySelectorAll<HTMLElement>('.dock-item')];
+      const fine = matchMedia('(hover: hover) and (pointer: fine) and (min-width: 700px)');
+      const calm = matchMedia('(prefers-reduced-motion: reduce)');
+      let centres: number[] = [];
+      let pointerX = 0;
+      let frame = 0;
+
+      const measure = () => {
+        items.forEach((i) => i.style.removeProperty('--s'));
+        centres = items.map((i) => {
+          const r = i.getBoundingClientRect();
+          return r.left + r.width / 2;
+        });
+      };
+
+      const apply = () => {
+        const reach = (items[0]?.querySelector('.tile')?.getBoundingClientRect().height ?? 42) * 3.2;
+        items.forEach((i, n) => {
+          const d = Math.abs(pointerX - centres[n]);
+          const s = d >= reach ? 1 : 1 + 0.75 * (Math.cos((Math.PI * d) / reach) + 1) / 2;
+          i.style.setProperty('--s', s.toFixed(3));
+        });
+      };
+
+      dock.addEventListener('pointerenter', (e) => {
+        if (!fine.matches || calm.matches || e.pointerType !== 'mouse') return;
+        measure();
+        dock.classList.add('magnifying');
+      });
+      dock.addEventListener('pointermove', (e) => {
+        if (!dock.classList.contains('magnifying')) return;
+        pointerX = e.clientX;
+        frame ||= requestAnimationFrame(() => { frame = 0; apply(); });
+      });
+      dock.addEventListener('pointerleave', () => {
+        cancelAnimationFrame(frame);
+        frame = 0;
+        dock.classList.remove('magnifying');
+        items.forEach((i) => i.style.removeProperty('--s'));
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,19 @@
+---
+import Desktop from '../../layouts/Desktop.astro';
+import { posts } from '../../data/site';
+
+export function getStaticPaths() {
+  return posts.map((p) => ({ params: { slug: p.slug }, props: { post: p } }));
+}
+
+const { post } = Astro.props;
+---
+
+<Desktop title={post.title} window="Writing" path={`/blog/${post.slug}/`}>
+  <h1>{post.title}</h1>
+  <p class="lede">{post.date}</p>
+  <div class="prose">
+    {post.body.split('\n\n').map((para) => <p>{para}</p>)}
+  </div>
+  <p><a class="btn" href="/blog/">← All articles</a></p>
+</Desktop>

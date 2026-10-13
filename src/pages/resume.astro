@@ -1,0 +1,58 @@
+---
+import Desktop from '../layouts/Desktop.astro';
+import { identity, projects, languages, stats, education } from '../data/site';
+
+const skills = languages;
+---
+
+<Desktop title="Résumé" window="Résumé" path="/resume/">
+  <h1>Résumé</h1>
+  <p class="lede">{identity.bio}</p>
+
+  <div class="buttons">
+    <a class="btn primary" href={identity.github} rel="noreferrer">GitHub ↗</a>
+    <a class="btn" href={`mailto:${identity.email}`}>{identity.email}</a>
+    <a class="btn" href="/">All projects</a>
+  </div>
+
+  <h2>EDUCATION</h2>
+  {
+    education.map((e) => (
+      <section style="margin-top:14px">
+        <strong>
+          {e.degree} — {e.school}
+        </strong>
+        <div class="meta" style="color:var(--text-2);font-size:11px">{e.when}</div>
+        {e.detail && <p>{e.detail}</p>}
+      </section>
+    ))
+  }
+
+  <h2 style="margin-top:26px">SELECTED WORK</h2>
+  <table class="list">
+    <tbody>
+      {
+        projects.map((p) => (
+          <tr>
+            <td>
+              <a href={p.url} rel="noreferrer">{p.name}</a>
+              <br />
+              <span class="meta">{p.description}</span>
+            </td>
+            <td class="date">{p.language}</td>
+          </tr>
+        ))
+      }
+    </tbody>
+  </table>
+
+  <h2 style="margin-top:26px">SKILLS</h2>
+  <p>{skills.join(' · ')}</p>
+
+  <h2 style="margin-top:26px">AT A GLANCE</h2>
+  <ul class="stats">
+    <li><b>{stats.repos}</b><span>Public repos</span></li>
+    <li><b>{stats.languages}</b><span>Languages</span></li>
+    <li><b>{projects.length}</b><span>Featured projects</span></li>
+  </ul>
+</Desktop>

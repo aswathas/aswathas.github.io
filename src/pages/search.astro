@@ -1,0 +1,79 @@
+---
+import Desktop from '../layouts/Desktop.astro';
+---
+
+<Desktop title="Search — site" window="Search" path="/search/">
+  <h1>Search</h1>
+  <p class="lede">Projects and writing, indexed at build time.</p>
+
+  <form class="searchform" role="search">
+    <p>
+      <label for="query">Search projects and writing</label>
+      <input id="query" name="q" type="search" autocomplete="off" />
+    </p>
+    <p>
+      <label for="kind">Show</label>
+      <select id="kind">
+        <option value="all">Everything</option>
+        <option value="project">Projects</option>
+        <option value="article">Articles</option>
+      </select>
+    </p>
+  </form>
+
+  <p class="status" data-status>Loading search…</p>
+  <ul class="results" data-results hidden></ul>
+
+  <script>
+    import { filterItems } from '../lib/search';
+
+    const form = document.querySelector('.searchform');
+    const query = document.querySelector('#query');
+    const kind = document.querySelector('#kind');
+    const status = document.querySelector('[data-status]');
+    const results = document.querySelector('[data-results]');
+
+    let items = [];
+
+    const render = () => {
+      const found = filterItems(items, query.value, kind.value);
+      results.replaceChildren(
+        ...found.map((i) => {
+          const li = document.createElement('li');
+          const a = document.createElement('a');
+          a.href = i.url;
+          a.textContent = i.title;
+          const p = document.createElement('p');
+          p.className = 'meta';
+          p.textContent = i.description;
+          li.append(a, p);
+          return li;
+        }),
+      );
+      results.hidden = found.length === 0;
+      status.textContent = found.length
+        ? `${found.length} result${found.length === 1 ? '' : 's'}`
+        : 'No matches. Try another term.';
+    };
+
+    const syncUrl = () => {
+      const u = new URL(location.href);
+      query.value ? u.searchParams.set('q', query.value) : u.searchParams.delete('q');
+      kind.value === 'all' ? u.searchParams.delete('kind') : u.searchParams.set('kind', kind.value);
+      history.replaceState(null, '', u);
+    };
+
+    const u = new URLSearchParams(location.search);
+    query.value = u.get('q') ?? '';
+    if (u.get('kind') === 'article' || u.get('kind') === 'project') kind.value = u.get('kind')!;
+
+    fetch('/search-index.json', { signal: AbortSignal.timeout(10_000) })
+      .then((r) => (r.ok ? r.json() : Promise.reject(new Error(String(r.status)))))
+      .then((data) => { items = data; render(); })
+      .catch(() => { status.innerHTML = 'Search could not load. <a href="/blog/">Browse writing</a> instead.'; status.classList.add('alert'); });
+
+    form.addEventListener('submit', (e) => { e.preventDefault(); render(); syncUrl(); });
+    query.addEventListener('input', () => { render(); syncUrl(); });
+    kind.addEventListener('change', () => { render(); syncUrl(); });
+  </script>
+</Desktop>

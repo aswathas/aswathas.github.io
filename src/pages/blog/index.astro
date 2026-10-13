@@ -1,0 +1,22 @@
+---
+import Desktop from '../../layouts/Desktop.astro';
+import { posts } from '../../data/site';
+---
+
+<Desktop title="Writing" window="Writing" path="/blog/">
+  <h1>Writing</h1>
+  <p class="lede">Engineering and product notes.</p>
+  <ul class="cards">
+    {
+      posts.map((p) => (
+        <li>
+          <a class="card" href={`/blog/${p.slug}/`}>
+            <strong>{p.title}</strong>
+            <span>{p.summary}</span>
+            <span class="meta">{p.date} · {p.body.split(/\s+/).length} words</span>
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</Desktop>
