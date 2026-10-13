@@ -1,4 +1,4 @@
-# palash.dev — no, this one's mine
+# aswathas.github.io
 
 A personal site for [Aswath AS](https://github.com/aswathas), built as a static
 Astro site and served from Cloudflare Pages.
