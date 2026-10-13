@@ -16,10 +16,9 @@ export const identity = {
   linkedin: '',
   // TODO: real links
   email: 'aswathas13@gmail.com',
-  location: 'India',
-  // TODO: city and state — used in the header and JSON-LD
+  location: 'Chennai, India',
   tagline: 'I build across AI, Web3, finance, and security.',
-  bio: 'I build across AI, Web3, finance, and security — clinical intelligence, on-chain forensics, cross-border payments, and the tooling around them.',
+  bio: 'Final-year CSE at SRMIST. I build across AI, Web3, finance, and security — clinical intelligence, on-chain forensics, cross-border payments, and the tooling around them.',
 };
 
 export type Project = {
@@ -271,9 +270,14 @@ export const stats = {
   since: raw.projects.reduce((y, r) => Math.min(y, Number(r.createdAt.slice(0, 4))), 9999),
 };
 
-// TODO: replace with real education.
+// TODO: add expected graduation year once confirmed.
 export const education: { school: string; degree: string; when: string; detail: string }[] = [
-  { school: 'TODO — college', degree: 'TODO — branch', when: 'TODO — years', detail: '' },
+  {
+    school: 'SRM Institute of Science and Technology, Kattankulathur',
+    degree: 'B.Tech — Computer Science and Engineering',
+    when: '4th year',
+    detail: '',
+  },
 ];
 
 export type Post = {

@@ -6,6 +6,7 @@ import { identity, projects, posts, archive, languages, stats } from '../data/si
 <Desktop title={`${identity.name} — Software engineer`} window="Work" path="/">
   <h1>{identity.name}</h1>
   <p class="lede">{identity.tagline}</p>
+  <p class="meta" style="margin:6px 0 0;color:var(--text-2);font-size:12px">{identity.location}</p>
 
   <div class="buttons">
     <a class="btn primary" href="/contact/">Get in Touch</a>

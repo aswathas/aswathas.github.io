@@ -35,6 +35,8 @@ const stats = [
       alternateName: [identity.handle],
       url: Astro.site?.href ?? 'https://example.com/',
       sameAs: [identity.github, identity.instagram, identity.x].filter(Boolean),
+      jobTitle: 'Computer Science undergraduate',
+      homeLocation: { '@type': 'Place', name: identity.location },
     })} />
   </head>
   <body>
