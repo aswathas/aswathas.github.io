@@ -268,6 +268,10 @@ export const projects: Project[] = [
       { src: '/gallery/forensic-tool-01-home.png', caption: 'Landing' },
       { src: '/gallery/forensic-tool-02-dashboard.png', caption: 'Dashboard' },
       { src: '/gallery/forensic-tool-03-investigation.png', caption: 'Investigation' },
+      { src: '/gallery/forensic-tool-04-risk-entities.png', caption: 'High-risk entities' },
+      { src: '/gallery/forensic-tool-04-attack-graphs.png', caption: 'Attack graphs' },
+      { src: '/gallery/forensic-tool-05-fund-flow.png', caption: 'How funds moved' },
+      { src: '/gallery/forensic-tool-06-signals-filtered.png', caption: 'Signal filters' },
     ],
     capabilities: [
       {
