@@ -302,6 +302,7 @@ export const projects: Project[] = [
       { src: '/gallery/love-lace-04-enter-amount.png', caption: 'Enter amount' },
       { src: '/gallery/love-lace-05-confirm-transfer.png', caption: 'Confirm' },
       { src: '/gallery/love-lace-06-transfer-complete.png', caption: 'Complete' },
+      { src: '/gallery/love-lace-07-register.png', caption: 'Account creation' },
     ],
     capabilities: [
       {
