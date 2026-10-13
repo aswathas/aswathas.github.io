@@ -40,3 +40,11 @@
     dock.classList.remove('magnifying');
     items.forEach((i) => i.style.removeProperty('--s'));
   });
+
+// Launch feedback: bounce the icon, then let the navigation happen.
+for (const item of items) {
+  item.addEventListener('click', () => {
+    item.classList.add('launching');
+    setTimeout(() => item.classList.remove('launching'), 420);
+  });
+}
