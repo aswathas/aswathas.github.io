@@ -43,6 +43,8 @@ export type Project = {
   highlights?: [string, string][];
   /** Collapsible section body. */
   capabilities?: { title: string; body: string }[];
+  /** Problem -> approach -> result. The three questions a reader actually has. */
+  problem?: { problem: string; approach: string; result: string };
   /** Short line under the name. Omitted when absent — never a copy of the description. */
   tagline?: string;
   /** Screenshot URLs, opened in the preview dialog. */
@@ -58,6 +60,11 @@ export const projects: Project[] = [
   {
     name: 'axiom',
     slug: slug('axiom'),
+    problem: {
+      problem: 'Clinical AI that answers confidently when the chart does not support it is worse than no tool at all — a nurse trusts it and moves on.',
+      approach: 'Every answer has to carry the evidence it came from, and a claim the record does not cover has to be refused rather than hedged.',
+      result: 'A calibrated evidence layer: claims cite the record, and confidence is scored against what the record actually shows.',
+    },
     description:
       'Evidence-grounded clinical intelligence layer for EMRs. Calibrated refusal when the record does not support the claim.',
     language: 'Python',
@@ -80,6 +87,12 @@ export const projects: Project[] = [
   {
     name: 'ColdTrust',
     slug: 'coldtrust',
+    problem: {
+      problem: 'Cold chains break in the gaps between systems. A shipment passes inspection, then sits unlogged in transit, then arrives spoiled with nobody able to say where.',
+      approach: 'Put enforcement in the chaincode instead of after it, on a permissioned ledger so only approved organisations can write.',
+      result: 'Hyperledger Fabric 2.5 with Raft consensus and CouchDB world state, a Go chaincode that rejects policy violations, and a React dashboard on top. 11 of 11 integration tests pass.',
+    },
+
     description:
       'Enterprise cold-chain traceability and smart-contract enforcement on Hyperledger Fabric 2.5 LTS. Go chaincode, Raft consensus, CouchDB world state, React 18 dashboard.',
     language: 'TypeScript',
@@ -106,6 +119,12 @@ export const projects: Project[] = [
   {
     name: 'AttackLogs',
     slug: 'attack-logs',
+    problem: {
+      problem: 'Detection tools get benchmarked against public logs scraped after the fact. Nobody knows which transactions were the attack, so the score means nothing.',
+      approach: 'Generate the ground truth instead: run the real exploit, keep the source and the expected signals beside the trace.',
+      result: '36 documented exploits reproduced as Foundry simulations, emitting forensic-grade NDJSON across seven entity files, with the attacker-controlled addresses marked.',
+    },
+
     description:
       'EVM attack simulation dataset — 36 documented smart-contract exploits running on a local chain, producing forensic-grade NDJSON that matches a published schema.',
     language: 'Solidity',
@@ -128,6 +147,12 @@ export const projects: Project[] = [
   {
     name: 'ChainTrace',
     slug: 'chain-trace',
+    problem: {
+      problem: 'Following stolen crypto across chains usually means trusting a hosted explorer with your investigation, which is exactly what you cannot do.',
+      approach: 'Self-host the whole trail so nothing about the investigation leaves the machine.',
+      result: 'A self-hostable multi-chain trace you can point at your own node and keep offline.',
+    },
+
     description:
       'Open-source, self-hostable multi-chain blockchain forensics. Trace stolen funds across chains.',
     language: 'HTML',
@@ -149,6 +174,12 @@ export const projects: Project[] = [
   {
     name: 'EVM Log Extractor',
     slug: 'evm-log-extractor',
+    problem: {
+      problem: 'Pulling raw logs off a chain is easy. Getting them into a shape a forensic tool can trust is where investigations quietly break — wrong casing, wei as floats, duplicates.',
+      approach: 'Split extraction, normalisation, and decoding into three replayable stages so a decode bug never means re-scanning a chain.',
+      result: 'A Python CLI producing flat NDJSON with EIP-55 checksummed addresses and wei as decimal strings, driven by a manifest so every stage is reproducible.',
+    },
+
     description:
       'Forensics-grade EVM log extractor, normaliser, and decoder for any JSON-RPC endpoint. Checksummed addresses, wei as decimal strings, flat NDJSON.',
     language: 'Python',
@@ -171,6 +202,11 @@ export const projects: Project[] = [
   {
     name: 'AI Brain',
     slug: slug('ai-brain'),
+    problem: {
+      problem: 'Notes rot. You write something down, never look at it again, and the knowledge never compounds.',
+      approach: 'Make the notes a live graph that agents can read and write, rather than a folder of files nobody revisits.',
+      result: 'One wiki core behind three surfaces — a library, a CLI, and an Electron desktop app — with pluggable providers and local-first storage.',
+    },
     description:
       'Local-first personal wiki that evolves with you. A library plus a CLI and an Electron desktop app for Claude Code, Hermes, and any LLM provider.',
     language: 'TypeScript',
@@ -194,6 +230,11 @@ export const projects: Project[] = [
   {
     name: 'the-analyst',
     slug: slug('the-analyst'),
+    problem: {
+      problem: 'Revision material is scattered across a dozen PDFs and a head full of half-remembered weightings.',
+      approach: 'Structure it by topic and weight, so revision follows the syllabus instead of the textbook order.',
+      result: 'Six subjects decoded, each with paper and topic counts, a topic priority heatmap, and an exam-structure breakdown that shows where the marks actually sit.',
+    },
     description:
       'Semester exam intelligence — Data Science, Cloud Computing, Compiler Design and three more subjects decoded.',
     language: 'TypeScript',
@@ -217,6 +258,11 @@ export const projects: Project[] = [
   {
     name: 'OLX India CLI',
     slug: slug('olx-india-cli'),
+    problem: {
+      problem: 'Buying a used car in India means checking forty listings across two sites and guessing which number is real.',
+      approach: 'Collect and score instead of scroll, and keep the tracking somewhere you can run it again.',
+      result: 'A CLI and web app that searches, filters, and AI-scores listings, so you compare cars rather than tabs.',
+    },
     description:
       'OLX India car search CLI and web app. Search, score, and track second-hand cars with AI.',
     language: 'TypeScript',
@@ -239,6 +285,11 @@ export const projects: Project[] = [
   {
     name: 'ChainSentinel',
     slug: slug('chain-sentinel'),
+    problem: {
+      problem: 'Exploit response usually starts from an alert, after the money has already moved.',
+      approach: 'Start from a documented attack pattern and trace it through the transaction history instead of waiting to be told.',
+      result: 'An EVM forensics tool that walks a real exploit pattern end to end across real traces.',
+    },
     description: 'EVM blockchain forensics tool. Investigate on-chain exploits end to end.',
     language: 'Solidity',
     url: 'https://github.com/aswathas/Project-Hail-Mary',
@@ -256,6 +307,11 @@ export const projects: Project[] = [
   {
     name: 'ForensicToolW3',
     slug: slug('forensic-tool'),
+    problem: {
+      problem: 'Forensic findings live in one analyst\'s head and a folder of screenshots. The next person starts over.',
+      approach: 'Put the whole pipeline behind one UI and ground the assistant in the artefacts the pipeline produced, not in guesses.',
+      result: 'A React 19 investigation dashboard over an Express API, 28 heuristic rules firing on real signal data, risk-scored entities, fund-flow graphs, and a local Ollama copilot.',
+    },
     description:
       'Enterprise-grade EVM forensics investigation dashboard. React 19 front end, Express API, and an Ollama copilot over simulated exploit evidence.',
     language: 'TypeScript',
@@ -287,6 +343,11 @@ export const projects: Project[] = [
   {
     name: 'Love Lace',
     slug: slug('love-lace'),
+    problem: {
+      problem: 'Cross-border payments route through correspondent banks that take a cut and add days. For small transfers the fee is most of the money.',
+      approach: 'Settle directly on chain so the chain of intermediaries disappears from the path.',
+      result: 'Invoicing and payments on Celo with a React and Remix front end, Solidity contracts, wallet support, and an LLM in the loop for the parts a human would otherwise retype.',
+    },
     description:
       'Blockchain cross-border payments and invoicing on Celo. React, Remix, Solidity, MetaMask, and LLM-assisted workflows.',
     language: 'JavaScript',
@@ -318,6 +379,12 @@ export const projects: Project[] = [
   {
     name: 'SafePass',
     slug: 'safe-pass',
+    problem: {
+      problem: 'One-time passwords sent over SMS are readable in transit and expensive to send. The channel is the weakest link in most logins.',
+      approach: 'Anchor the challenge on-chain, where a replay is visibly wrong instead of silently accepted.',
+      result: 'A Web3 authentication system that replaces the SMS one-time password with a verifiable on-chain challenge.',
+    },
+
     description: 'A better alternative for OTP — one-time passwords anchored on-chain instead of a shared SMS gateway.',
     language: 'JavaScript',
     url: 'https://github.com/aswathas/Safe_Passfortest',
@@ -338,6 +405,11 @@ export const projects: Project[] = [
   {
     name: 'agent-skills',
     slug: slug('agent-skills'),
+    problem: {
+      problem: 'Prompts in a doc get copy-pasted, drift, and rot. Nobody can tell which version an agent actually used.',
+      approach: 'Package the instructions as installable skill definitions the CLI resolves itself.',
+      result: 'A skill pack for Claude Code covering deep learning, exam preparation, and knowledge work.',
+    },
     description: 'Claude Code CLI skills for deep learning, exam prep, and knowledge work.',
     language: 'JavaScript',
     url: 'https://github.com/aswathas/agent-skills',
@@ -355,6 +427,11 @@ export const projects: Project[] = [
   {
     name: 'Healthcare Tracker',
     slug: slug('healthcare-tracker'),
+    problem: {
+      problem: 'Your health record is spread across five apps, none of which show the whole picture at once.',
+      approach: 'Put conditions, medications, results, appointments, and goals in one view over a real backend.',
+      result: 'A Next.js and Supabase dashboard with migrations, so the data model is versioned rather than trapped in local storage.',
+    },
     description:
       'Next.js and Supabase health management app — conditions, medications, test results, appointments, and goals in one dashboard.',
     language: 'TypeScript',

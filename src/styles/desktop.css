@@ -1479,3 +1479,35 @@ select {
   background: var(--panel-bg);
   font: inherit;
 }
+
+/* problem / approach / result */
+.section-why {
+  display: grid;
+  gap: 14px;
+  padding: 16px 0 4px;
+  border-top: 1px solid var(--hairline);
+  margin-bottom: 14px;
+}
+
+@media (width >= 860px) {
+  .section-why {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.section-why h2 {
+  margin: 0 0 5px;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.section-why p {
+  margin: 0;
+  color: var(--text-2);
+  line-height: 1.6;
+}
+
+.section-why > div:first-child p {
+  color: var(--text-1);
+}

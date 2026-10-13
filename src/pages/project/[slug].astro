@@ -72,6 +72,25 @@ const readmeHtml = readme?.markdown
   </section>
 
   {
+    project.problem && (
+      <section class="section-why" aria-label="Why this exists">
+        <div>
+          <h2>The problem</h2>
+          <p>{project.problem.problem}</p>
+        </div>
+        <div>
+          <h2>The approach</h2>
+          <p>{project.problem.approach}</p>
+        </div>
+        <div>
+          <h2>What is there</h2>
+          <p>{project.problem.result}</p>
+        </div>
+      </section>
+    )
+  }
+
+  {
     project.tags.length > 0 && (
       <details class="section" open>
         <summary>
