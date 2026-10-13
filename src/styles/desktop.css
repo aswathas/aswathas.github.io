@@ -285,13 +285,45 @@ select:focus-visible {
   border-right: 1px solid var(--hairline);
   background: var(--panel-bg);
   padding: 14px;
+  /* Fits without scrolling on a normal screen; scrolls only on a very short one. */
+  overflow-y: auto;
 }
 
-/* second rail: Elsewhere, stacked under the project list */
-.sidebar + .sidebar {
-  grid-column: 1;
-  grid-row: 2;
-  border-top: 1px solid var(--hairline);
+.app-tiles {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 4px;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.app-tiles a {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: 6px;
+  padding: 4px 6px;
+  border-radius: 7px;
+  color: inherit;
+  text-decoration: none;
+  font-size: 11px;
+}
+
+.app-tiles a:hover,
+.app-tiles a[aria-current="page"] {
+  background: var(--accent);
+  color: #fff;
+}
+
+.app-tiles img {
+  border-radius: 6px;
+}
+
+.app-tiles span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .sidebar h2 {
@@ -1052,8 +1084,7 @@ select {
     grid-template-columns: 1fr;
   }
 
-  .sidebar,
-  .sidebar + .sidebar {
+  .sidebar {
     grid-column: 1;
     border-right: 0;
     border-bottom: 1px solid var(--hairline);
