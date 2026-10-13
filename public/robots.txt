@@ -12,3 +12,5 @@ Allow: /
 
 User-agent: OAI-SearchBot
 Allow: /
+
+Sitemap: /sitemap.xml

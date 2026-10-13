@@ -1,7 +1,9 @@
 ---
 import '../styles/desktop.css';
 import Palette from './Palette.astro';
-import { identity, projects, posts, nav } from '../data/site';
+import { identity, projects, posts, nav, skills, education, experience } from '../data/site';
+
+const base = (Astro.site?.href ?? 'https://example.com/').replace(/\/$/, '') + '/';
 
 type Props = { title: string; window?: string; path?: string };
 const { title, window: win = title, path = '/', current = Astro.url.pathname } =
@@ -37,13 +39,32 @@ const stats = [
     </script>
     <script type="application/ld+json" set:html={JSON.stringify({
       '@context': 'https://schema.org',
-      '@type': 'Person',
-      name: identity.name,
-      alternateName: [identity.handle],
-      url: Astro.site?.href ?? 'https://example.com/',
-      sameAs: [identity.github, identity.instagram, identity.x].filter(Boolean),
-      jobTitle: 'Computer Science undergraduate',
-      homeLocation: { '@type': 'Place', name: identity.location },
+      '@graph': [
+        {
+          '@type': 'Person',
+          '@id': `${base}#person`,
+          name: identity.name,
+          alternateName: [identity.handle],
+          url: base,
+          jobTitle: identity.title,
+          description: identity.bio,
+          sameAs: [identity.github, identity.instagram, identity.x].filter(Boolean),
+          email: `mailto:${identity.email}`,
+          homeLocation: { '@type': 'Place', name: identity.location },
+          knowsAbout: skills.slice(0, 12),
+          alumniOf: education.map((e) => ({ '@type': 'CollegeOrUniversity', name: e.school })),
+          worksFor: { '@type': 'Organization', name: experience[0]?.org ?? 'YUPCHA' },
+        },
+        {
+          '@type': 'WebSite',
+          '@id': `${base}#website`,
+          url: base,
+          name: `${identity.name} — ${identity.title}`,
+          description: identity.tagline,
+          inLanguage: 'en',
+          publisher: { '@id': `${base}#person` },
+        },
+      ],
     })} />
   </head>
   <body>
