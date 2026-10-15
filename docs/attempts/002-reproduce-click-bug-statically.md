@@ -60,3 +60,38 @@ should open the page, click a card, and screenshot before and after — not read
 another stylesheet.
 
 **Still untested.** Whether any of this is the cause at all.
+---
+
+## Update — 2026-10-16: cause found, in a different repository
+
+**This attempt was searching the wrong codebase, and it is closed as solved rather
+than abandoned.**
+
+The report "when i click a project isn't not opening" was not about this site. It
+was about `agent-chronicles`, the Spider-Man newspaper portfolio, which was created
+the same day and built in a parallel session.
+
+The cause, from `1b24be5` in that repository:
+
+> "Every card is an `<a href>`, but the click handler called `preventDefault()` on
+> all of them — no card link navigated, which is why cards weren't opening."
+
+The href was correct the entire time. A click handler was cancelling it. The full
+record is in `agent-chronicles/docs/attempts/004-card-links-never-navigated.md`.
+
+### What this attempt actually cost, and what it was worth
+
+Six static hypotheses were tested here and all six eliminated, because this site was
+never where the bug was. That work produced no fix and no false fix, which is the
+best available outcome for a wrong hypothesis.
+
+What it did produce: it established that the card markup here emits correct hrefs,
+every project page returns 200, no overlay covers the grid, and no listener
+cancels navigation. Every one of those checks still holds. If this site ever reports
+the same symptom, this attempt is the list of things already ruled out, and the
+search should start somewhere else.
+
+The lesson is narrow and worth keeping. A bug report names a symptom, not a
+location. Six checks against the wrong repository is what a correct-but-unlucky
+investigation costs — not wasted work, but bounded work. The thing that would have
+shortened it was one question asked at the start: *which page?*
