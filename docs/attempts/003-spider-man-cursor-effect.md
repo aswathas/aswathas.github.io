@@ -62,3 +62,41 @@ The user should confirm that, or describe what they actually want, because
 ## Outcome
 
 Open. Do not close this file until something has actually been built and measured.
+---
+
+## Update — 2026-10-16: this was already built and removed, in a sibling repository
+
+**Closed. Abandoned — the answer already exists, and it is a no.**
+
+`agent-chronicles` shipped a `cursor: none` custom cursor in the same session. It was
+removed in `1b24be5`:
+
+> "Removes cursor:none and the custom cursor entirely. A 12px dot over text-heavy
+> copy was worse than the native pointer, and it broke text selection."
+
+Two failures, both found by using the page and neither visible in the diff:
+
+1. **It was worse than the OS pointer.** The native cursor carries information a
+   12px dot cannot — resize edges, text I-beam, scrollbar affordances.
+2. **It broke text selection.** Hiding the native cursor took the selection
+   affordance with it, on a site whose whole job is reading project descriptions.
+
+The full record is in
+`agent-chronicles/docs/attempts/002-custom-cursor.md`.
+
+### What this changes for the recommendation above
+
+The original recommendation in this file — a static overlay, `pointer-events: none`,
+hidden under reduced motion — was written before that evidence existed. It is a
+reasonable design and it is still the right recommendation **if the effect is ever
+built on this site**, because this site has a card grid rather than long prose.
+
+But the more useful answer is the one the sibling repository already paid for: the
+Spider-Man theme has not needed a cursor to work. It has the web patterns on hover,
+the tether as a position indicator, and the edge alarm. All three deliver the theme
+without taking anything from the reader, and none of them compete with the platform
+over a capability the reader came for.
+
+**The decision is therefore not "build it small". The decision is "do not build it".**
+If this is wanted here, it is worth revisiting when there is a reason beyond
+theming, not before.
