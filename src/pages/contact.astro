@@ -12,7 +12,7 @@ import { identity } from '../data/site';
       <tr><td>Phone</td><td class="date"><a href={`tel:${identity.phone.replace(/\s/g, '')}`}>{identity.phone}</a></td></tr>
       <tr><td>GitHub</td><td class="date"><a href={identity.github} rel="noreferrer">{identity.handle}</a></td></tr>
       {identity.instagram && <tr><td>Instagram</td><td class="date"><a href={identity.instagram} rel="noreferrer">@aswath_ig</a></td></tr>}
-      {identity.x && <tr><td>X</td><td class="date"><a href={identity.x} rel="noreferrer">@aswath_ig</a></td></tr>}
+      <tr><td>X</td><td class="date"><a href={identity.x || '#'} rel="noreferrer" aria-disabled={!identity.x}>{identity.x ? '@aswath' : '—'}</a></td></tr>
       {identity.linkedin && <tr><td>LinkedIn</td><td class="date"><a href={identity.linkedin} rel="noreferrer">Profile</a></td></tr>}
       <tr><td>Writing feed</td><td class="date"><a href="/rss.xml">RSS</a></td></tr>
       <tr><td>Portfolio</td><td class="date"><a href={identity.portfolio} rel="noreferrer">hellokity.vercel.app</a></td></tr>

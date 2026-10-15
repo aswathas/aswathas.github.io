@@ -14,7 +14,7 @@ const { project, repo } = Astro.props;
 const icon = `/projects/${project.slug}.svg`;
 
 ---
-<Desktop title={`${project.name}`} window={project.name} path={`/project/${project.slug}/`}>
+<Desktop title={`${project.name}`} window={project.name} path={`/project/${project.slug}/`} description={project.description}>
   <section class="getinfo" aria-labelledby="product-title">
     <div class="main">
       <header>

@@ -11,9 +11,9 @@ export const identity = {
   handle: 'aswathas',
   github: 'https://github.com/aswathas',
   instagram: 'https://instagram.com/aswath_ig',
-  // TODO: other links — do not guess these
+  // X stays unset on purpose: the row renders but goes nowhere.
   x: '',
-  linkedin: '',
+  linkedin: 'https://www.linkedin.com/in/aswathas11/',
   // TODO: real links
   email: 'aswathas@20.com',
   phone: '+91 6382974762',

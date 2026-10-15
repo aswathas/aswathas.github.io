@@ -9,7 +9,7 @@ export function getStaticPaths() {
 const { post } = Astro.props;
 ---
 
-<Desktop title={post.title} window="Writing" path={`/blog/${post.slug}/`}>
+<Desktop title={post.title} window="Writing" path={`/blog/${post.slug}/`} description={post.summary}>
   <h1>{post.title}</h1>
   <p class="lede">{post.date}</p>
   <div class="prose">
