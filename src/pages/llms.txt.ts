@@ -1,7 +1,7 @@
 import type { APIRoute } from 'astro';
 import { identity, projects, posts } from '../data/site';
 
-const site = 'https://example.com';
+const site = 'https://aswathas-site.pages.dev';
 
 export const GET: APIRoute = () => {
   const body = [
