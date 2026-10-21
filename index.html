@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="dark" />
+
+    <title>Aswath AS — AI Developer</title>
+    <meta
+      name="description"
+      content="Portfolio of Aswath AS, AI developer in Chennai building across AI agents, Web3 forensics, market data and clinical intelligence. Twelve featured projects, sixty-four source repositories."
+    />
+    <meta name="author" content="Aswath AS" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Aswath AS — AI Developer" />
+    <meta
+      property="og:description"
+      content="AI agents, Web3 forensics, market data and clinical intelligence. A real 3D world of shipped work."
+    />
+    <meta property="og:image" content="./og.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
+    <link
+      rel="preload"
+      href="./fonts/chivo-600.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="./fonts/jetbrains-mono-400.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Aswath AS",
+        "jobTitle": "AI Developer",
+        "url": "https://github.com/aswathas",
+        "sameAs": [
+          "https://github.com/aswathas",
+          "https://www.linkedin.com/in/aswathas11/",
+          "https://instagram.com/aswath_ig"
+        ],
+        "address": { "@type": "PostalAddress", "addressLocality": "Chennai", "addressCountry": "IN" },
+        "alumniOf": {
+          "@type": "CollegeOrUniversity",
+          "name": "SRM Institute of Science and Technology"
+        }
+      }
+    </script>
+    <script>
+      /*
+       * The hero entrance, in three states.
+       *
+       * `is-entering`  — the hidden start, applied before the first paint.
+       * `is-ready`     — the visible end. The transition between them is the
+       *                  page's one authored entrance.
+       * `is-settled`   — a forced end state. The hero is visible either way.
+       *
+       * The safety net must never depend on a timer alone: a background tab
+       * freezes timers and the compositor, and the transition can sit half
+       * finished for as long as the tab is hidden. So the end state is also
+       * driven by events that can only fire while the page is alive and
+       * attended — load, a visible tab, a first interaction.
+       *
+       * With JavaScript off, none of the classes exist and the hero renders
+       * in its final state. Nothing is ever held hostage by an animation.
+       */
+      (function () {
+        var d = document.documentElement;
+        d.classList.add('is-entering');
+
+        var settled = false;
+
+        var settle = function () {
+          if (settled) return;
+          settled = true;
+          d.classList.add('is-settled');
+        };
+
+        var go = function () {
+          d.classList.remove('is-entering');
+          d.classList.add('is-ready');
+        };
+
+        var start = function () {
+          requestAnimationFrame(go);
+          setTimeout(go, 120);
+        };
+
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', start);
+        } else {
+          start();
+        }
+
+        // The net, in layers.
+        setTimeout(settle, 1600);
+        window.addEventListener('load', settle);
+        window.addEventListener('pageshow', settle);
+        document.addEventListener('visibilitychange', function () {
+          if (!document.hidden) settle();
+        });
+        ['pointerdown', 'keydown', 'wheel', 'touchstart'].forEach(function (evt) {
+          window.addEventListener(evt, settle, { passive: true });
+        });
+      })();
+    </script>
+    <script type="module" crossorigin src="./assets/index-CIpxbsYU.js"></script>
+    <link rel="modulepreload" crossorigin href="./assets/react-Cb4AM5Ez.js">
+    <link rel="modulepreload" crossorigin href="./assets/three-BeztVg0D.js">
+    <link rel="stylesheet" crossorigin href="./assets/index-B6fZLR0r.css">
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>
