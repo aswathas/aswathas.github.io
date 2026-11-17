@@ -1,0 +1,17 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "side-tab",
+        "value": "*",
+        "files": [
+          "src/styles/desktop.css"
+        ],
+        "createdAt": "2026-11-17T16:32:36.174Z",
+        "reason": "False positive: 3px left rule on .readme blockquote (standard blockquote typography) using the neutral --hairline token #d6d8dc/#393b41, not a card accent; pre-existing, untouched by this change"
+      }
+    ]
+  }
+}
