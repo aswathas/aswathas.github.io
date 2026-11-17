@@ -5,6 +5,7 @@
 // source and the input to the live star counts, not the order of the page.
 
 import raw from './projects.json';
+import resume from './resume.json';
 
 export const identity = {
   name: 'Aswath AS',
@@ -14,8 +15,7 @@ export const identity = {
   // X stays unset on purpose: the row renders but goes nowhere.
   x: '',
   linkedin: 'https://www.linkedin.com/in/aswathas11/',
-  // TODO: real links
-  email: 'aswathas@20.com',
+  email: 'aswathas20@gmail.com',
   phone: '+91 6382974762',
   portfolio: 'https://hellokity.vercel.app/',
   title: 'AI Developer',
@@ -23,7 +23,6 @@ export const identity = {
   tagline: 'I build across AI, Web3, finance, and security.',
   // Profile paragraph, verbatim from the user's résumé.
   bio: 'Computer Science undergraduate (final year, SRMIST) with hands-on full-stack experience in AI and Web3 development. Won multiple national-level hackathons and freelanced client projects. Comfortable analysing financial statements and key metrics.',
-  tagline: 'I build across AI, Web3, finance, and security.',
 };
 
 export type Project = {
@@ -297,33 +296,16 @@ export const stats = {
   since: raw.projects.reduce((y, r) => Math.min(y, Number(r.createdAt.slice(0, 4))), 9999),
 };
 
-export const education: { school: string; degree: string; when: string; detail: string }[] = [
-  {
-    school: 'SRM Institute of Science and Technology, Kattankulathur',
-    degree: 'B.Tech — Computer Science and Engineering, Blockchain specialisation',
-    when: '2023 — 2027',
-    detail: '',
-  },
-];
+// Résumé content. src/data/resume.json is the single source of truth: the site
+// pages, the site's /resume.pdf and the application DOCX all read the same file,
+// so the résumé cannot drift between them.
+export const education: { school: string; degree: string; when: string; detail: string }[] =
+  resume.education;
 
-// From the résumé. Checked by the user, not inferred.
-export const experience: { role: string; org: string; when: string; points: string[] }[] = [
-  {
-    role: 'Web3 Developer',
-    org: 'SISA Infosec',
-    when: 'Aug 2025 — present',
-    points: [
-      'Working on a Web3 security framework.',
-      'Simulation and testing of stablecoin workflows.',
-      'Web3 attack vectors — compliance, monitoring, and mitigation.',
-    ],
-  },
-];
+export const experience: { role: string; org: string; when: string; points: string[] }[] =
+  resume.experience;
 
-export const skills = [
-  'ReactJS', 'NextJS', 'TailwindCSS', 'FastAPI', 'PostgreSQL',
-  'Solidity', 'Hardhat', 'Web3', 'Agno', 'LangChain', 'Financial reporting',
-];
+export const skills = resume.skillTags;
 
 export type Post = {
   slug: string;

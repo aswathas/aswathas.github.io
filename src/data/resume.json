@@ -1,0 +1,118 @@
+{
+  "name": "ASWATH A S",
+  "headline": "Final-year B.Tech (CSE) engineer, 2027 - Product Management & Analytics focus",
+  "contact": [
+    "Chennai, India  |  +91 6382974762  |  aswathas20@gmail.com",
+    "linkedin.com/in/aswathas11  |  github.com/aswathas  |  aswathas.github.io"
+  ],
+  "profile": "Final-year CSE student (SRMIST, CGPA 8.3/10) who ships end-to-end products and then measures them: an 83-source market assessment, a 60-vehicle benchmark across three delivery modes, a 20-filter used-car search product, and a 53-tool live market-data engine. Won multiple national-level hackathons and delivered freelance client builds. Comfortable with financial statements, KPIs and root-cause analysis; fluent in Python and SQL, and in turning technical findings into plain business language.",
+  "education": [
+    {
+      "degree": "B.Tech - Computer Science & Engineering (Blockchain specialisation)",
+      "school": "SRM Institute of Science and Technology, Kattankulathur",
+      "when": "2023 - 2027",
+      "detail": "CGPA 8.3/10"
+    }
+  ],
+  "experience": [
+    {
+      "role": "Web3 Developer",
+      "org": "SISA Infosec",
+      "when": "Aug 2025 - Present",
+      "points": [
+        "Built a Web3 security framework and ran simulation-based tests over stablecoin transaction workflows, logging every failure with reproducible steps.",
+        "Mapped Web3 attack vectors - compliance, monitoring, mitigation - into documented controls and monitoring rules the team could operate rather than one-off fixes.",
+        "Delivered findings as written evidence summaries so risk could be reviewed and signed off without reading the code."
+      ]
+    }
+  ],
+  "leadership": [
+    {
+      "role": "Associate Head, Blockchain Team",
+      "org": "CodeNex Club, SRM",
+      "when": "Aug 2024 - Present",
+      "points": [
+        "Organised tech events and hackathons end to end - problem framing, judging, logistics - and managed a team of student volunteers through delivery.",
+        "Ran internal learning sessions that took members from their first project to winning hackathons."
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "title": "Market Assessment & Launch Plan - Mobile Veterinary Practice, Chennai",
+      "right": "Research | Analytics | Ops",
+      "points": [
+        "Sized a two-corridor market from 83 cited sources and 100 scored localities: demand by hour, weekday and season, price bands and route economics, with every figure carrying its provenance tier.",
+        "Turned the evidence into a decision: a go/no-go verdict, a 90-day launch plan and a locality decision board (open Velachery first; hold OMR until a route carries six visits a day).",
+        "Built the checks that keep it honest - a script that closes the dataset's arithmetic and 47 narrative claims checked against the numbers."
+      ]
+    },
+    {
+      "title": "OLX India Car Search - search, score, compare",
+      "right": "Product | Engineering",
+      "points": [
+        "Built a filter-and-score product over an undocumented marketplace API: 20+ filters (price, year, km, fuel, owner, city) with AI ranking, so buyers compare listings instead of scrolling tabs.",
+        "Designed the evaluation to choose the architecture, not to prove it: 60 vehicles x 3 delivery modes, reporting context ingested (32,450 to 142 tokens), round trips (3 to 1) and latency (4.8s to 1.1s), with raw calls kept behind every number."
+      ]
+    },
+    {
+      "title": "pistol / TradeMCP - free Indian market data & screening",
+      "right": "Data | Analytics",
+      "points": [
+        "Shipped 53 free NSE/BSE tools (quotes for 8,000+ stocks, 20 indicators, screeners, backtests, portfolio risk) so decisions run on live data instead of a paywalled terminal.",
+        "Grounded it in primary sources - yfinance, NSE/BSE public filings, AMFI, FII/DII flows - with graceful degradation when a source dropped; 93 tests, no paid tier."
+      ]
+    },
+    {
+      "title": "FormBuddy - AI WhatsApp agent for Indian government forms",
+      "right": "OpenAI Buildathon",
+      "points": [
+        "Framed a user problem (fragmented portals, English-only PDFs, rejections over trivial spec errors) and segmented users across students, first-time job seekers, parents, MSMEs and migrants.",
+        "Shipped the feasibility argument, not just the demo: stack, ops ownership for keeping form data current, legal disclaimers, a 48-hour build plan - and a privacy stance of no OTP, PAN or password capture, every answer citing the official .gov.in source."
+      ]
+    },
+    {
+      "title": "Autonomous Payment Agent - product document",
+      "right": "Product strategy",
+      "points": [
+        "Wrote the product case: vision, the core problem, the market gap, a competitor landscape across wallet infrastructure, and the two-layer architecture that binds agent reasoning to on-chain enforcement."
+      ]
+    }
+  ],
+  "skills": [
+    {
+      "label": "Product & analytics",
+      "text": "SQL (PostgreSQL), Python (pandas), Excel / Google Sheets for financial reporting and back-test results, KPI definition, root-cause analysis, benchmark design, market sizing and demand modelling, pricing and route economics."
+    },
+    {
+      "label": "Delivery & ops",
+      "text": "requirement framing and feasibility write-ups, decision records and runbooks, release and evidence documentation, stakeholder coordination, Agile / Scrum, Git / GitHub."
+    },
+    {
+      "label": "Technical",
+      "text": "FastAPI, React, Next.js, Node.js, Solidity / Hardhat, Agno, LangChain, PostgreSQL, Docker, MCP."
+    },
+    {
+      "label": "Building up",
+      "text": "Tableau, Mixpanel, Jira, Figma."
+    }
+  ],
+  "certifications": "NPTEL - Programming in Java (2024)  |  Udemy - Python Developer  |  Winner, multiple national-level hackathons; builds include OpenAI Buildathon (FormBuddy), PEC Hacks (decentralised identity) and Dubaans (on-chain land registration).",
+  "skillTags": [
+    "SQL",
+    "Python",
+    "Excel / Sheets",
+    "PostgreSQL",
+    "FastAPI",
+    "React",
+    "Next.js",
+    "Agno",
+    "LangChain",
+    "Solidity",
+    "Financial reporting",
+    "Market analysis",
+    "Jira",
+    "Figma",
+    "Agile / Scrum"
+  ]
+}

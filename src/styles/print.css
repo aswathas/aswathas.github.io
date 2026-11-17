@@ -16,12 +16,12 @@
 
 @page {
   size: A4;
-  margin: 14mm 15mm;
+  margin: 10mm 12mm;
 }
 
 body {
   margin: 0;
-  font: 10pt/1.5 var(--font-ui);
+  font: 8.5pt/1.3 var(--font-ui);
   color: var(--ink);
   background: #fff;
 }
@@ -30,13 +30,13 @@ header {
   display: flex;
   align-items: center;
   gap: 14px;
-  padding-bottom: 10px;
+  padding-bottom: 8px;
   border-bottom: 1.5px solid var(--ink);
 }
 
 header img {
-  width: 62px;
-  height: 62px;
+  width: 54px;
+  height: 54px;
   border-radius: 8px;
   object-fit: cover;
   object-position: center 38%;
@@ -66,20 +66,22 @@ h1 {
 }
 
 section {
-  margin-top: 14px;
-  break-inside: avoid;
+  margin-top: 9px;
 }
 
+/* A section must be allowed to break: `break-inside: avoid` on a long section
+   pushed the whole projects block onto page 2 and left page 1 half empty. */
 h2 {
-  margin: 0 0 6px;
-  font: 600 8.5pt/1 var(--font-ui);
+  margin: 0 0 3px;
+  font: 600 8pt/1 var(--font-ui);
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--muted);
+  break-after: avoid;
 }
 
 .education {
-  margin: 0 0 8px;
+  margin: 0 0 6px;
 }
 
 .education strong {
@@ -92,7 +94,7 @@ h2 {
 }
 
 .job {
-  margin-bottom: 9px;
+  margin-bottom: 7px;
   break-inside: avoid;
 }
 
@@ -110,29 +112,44 @@ h2 {
 }
 
 .job .row strong {
-  font-size: 10.5pt;
+  font-size: 9.5pt;
 }
 
 .job .when {
-  font-size: 8.5pt;
+  font-size: 8pt;
   color: var(--muted);
   white-space: nowrap;
 }
 
 .job p {
   margin: 2px 0 0;
-  font-size: 9pt;
+  font-size: 8pt;
   color: var(--muted);
 }
 
 .skills {
+  margin: 0 0 2px;
+  font-size: 8.5pt;
+}
+
+.body {
   margin: 0;
-  font-size: 9.5pt;
+  font-size: 8.5pt;
+}
+
+ul.points {
+  margin: 2px 0 0;
+  padding-left: 14px;
+  font-size: 8pt;
+}
+
+ul.points li {
+  margin-bottom: 1px;
 }
 
 footer {
-  margin-top: 16px;
-  padding-top: 8px;
+  margin-top: 6px;
+  padding-top: 4px;
   border-top: 1px solid var(--rule);
   font-size: 8pt;
   color: var(--muted);

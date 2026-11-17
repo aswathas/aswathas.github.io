@@ -1,30 +1,51 @@
 import type { APIRoute } from 'astro';
-import { identity, projects, education, languages, stats } from '../data/site';
+import { stats } from '../data/site';
+import resume from '../data/resume.json';
 
-// Plain-text résumé. Fetched by the print page and by anyone who prefers
-// raw text over a PDF.
+// Plain-text résumé. Same content as /resume.pdf and the application DOCX —
+// all three read src/data/resume.json.
 
 export const GET: APIRoute = () => {
   const line = (s = '') => `${s}\n`;
   const body = [
-    line(identity.name),
-    line(identity.tagline),
-    line(`${identity.location}  ·  ${identity.handle}  ·  ${identity.email}`),
-    line(identity.github),
+    line(resume.name),
+    line(resume.headline),
+    ...resume.contact.map(line),
     line(),
-    'EDUCATION',
-    ...education.flatMap((e) => [line(`  ${e.degree}`), line(`  ${e.school} — ${e.when}`), line()]),
-    'SELECTED WORK',
-    ...projects.flatMap((p) => [
-      line(`  ${p.name} — ${p.language}`),
-      line(`    ${p.description}`),
-      line(`    ${p.url}`),
+    line('PROFILE'),
+    line(resume.profile),
+    line(),
+    line('EDUCATION'),
+    ...resume.education.flatMap((e) => [
+      line(`  ${e.degree} | ${e.when}`),
+      line(`  ${e.school} — ${e.detail}`),
       line(),
     ]),
-    'SKILLS',
-    line(`  ${languages.join(', ')}`),
+    line('EXPERIENCE'),
+    ...resume.experience.flatMap((e) => [
+      line(`  ${e.role} — ${e.org} | ${e.when}`),
+      ...e.points.map((p) => line(`    - ${p}`)),
+      line(),
+    ]),
+    line('LEADERSHIP'),
+    ...resume.leadership.flatMap((e) => [
+      line(`  ${e.role} — ${e.org} | ${e.when}`),
+      ...e.points.map((p) => line(`    - ${p}`)),
+      line(),
+    ]),
+    line('SELECTED PROJECTS'),
+    ...resume.projects.flatMap((p) => [
+      line(`  ${p.title} | ${p.right}`),
+      ...p.points.map((point) => line(`    - ${point}`)),
+      line(),
+    ]),
+    line('SKILLS'),
+    ...resume.skills.map((s) => line(`  ${s.label}: ${s.text}`)),
     line(),
-    'AT A GLANCE',
+    line('CERTIFICATIONS & HACKATHONS'),
+    line(resume.certifications),
+    line(),
+    line('AT A GLANCE'),
     line(`  ${stats.repos} public repositories · ${stats.languages} languages · building since ${stats.since}`),
   ].join('');
 

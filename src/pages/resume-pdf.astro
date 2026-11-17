@@ -1,36 +1,41 @@
 ---
 import '../styles/print.css';
-import { identity, projects, education, experience, languages, stats, skills } from '../data/site';
+import { identity, stats } from '../data/site';
+import resume from '../data/resume.json';
 ---
 
 <!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>{identity.name} — Résumé</title>
+    <title>{resume.name} — Résumé</title>
     <meta name="robots" content="noindex" />
   </head>
   <body>
     <header>
       <img src="../media/me.jpg" alt="" />
       <div>
-        <h1>{identity.name}</h1>
-        <p class="tagline">{identity.tagline}</p>
+        <h1>{resume.name}</h1>
+        <p class="tagline">{resume.headline}</p>
         <p class="contact">
-          {identity.location} · {identity.phone} · <a href={`mailto:${identity.email}`}>{identity.email}</a> ·
-          <a href={identity.github}>github.com/{identity.handle}</a>
+          {resume.contact[0]} · {resume.contact[1]}
         </p>
       </div>
     </header>
 
     <section>
+      <h2>Profile</h2>
+      <p class="body">{resume.profile}</p>
+    </section>
+
+    <section>
       <h2>Education</h2>
       {
-        education.map((e) => (
+        resume.education.map((e) => (
           <div class="education">
             <strong>{e.degree}</strong>
             <div>
-              {e.school} — {e.when}
+              {e.school} — {e.when} — {e.detail}
             </div>
           </div>
         ))
@@ -40,7 +45,7 @@ import { identity, projects, education, experience, languages, stats, skills } f
     <section>
       <h2>Experience</h2>
       {
-        experience.map((e) => (
+        resume.experience.map((e) => (
           <div class="job">
             <div class="row">
               <strong>
@@ -48,22 +53,51 @@ import { identity, projects, education, experience, languages, stats, skills } f
               </strong>
               <span class="when">{e.when}</span>
             </div>
-            <p>{e.points.join(' ')}</p>
+            <ul class="points">
+              {e.points.map((p) => (
+                <li>{p}</li>
+              ))}
+            </ul>
           </div>
         ))
       }
     </section>
 
     <section>
-      <h2>Selected work</h2>
+      <h2>Leadership</h2>
       {
-        projects.map((p) => (
+        resume.leadership.map((e) => (
           <div class="job">
             <div class="row">
-              <strong>{p.name}</strong>
-              <span class="when">{p.language}</span>
+              <strong>
+                {e.role} — {e.org}
+              </strong>
+              <span class="when">{e.when}</span>
             </div>
-            <p>{p.description}</p>
+            <ul class="points">
+              {e.points.map((p) => (
+                <li>{p}</li>
+              ))}
+            </ul>
+          </div>
+        ))
+      }
+    </section>
+
+    <section>
+      <h2>Selected projects</h2>
+      {
+        resume.projects.map((p) => (
+          <div class="job">
+            <div class="row">
+              <strong>{p.title}</strong>
+              <span class="when">{p.right}</span>
+            </div>
+            <ul class="points">
+              {p.points.map((point) => (
+                <li>{point}</li>
+              ))}
+            </ul>
           </div>
         ))
       }
@@ -71,13 +105,23 @@ import { identity, projects, education, experience, languages, stats, skills } f
 
     <section>
       <h2>Skills</h2>
-      <p class="skills">{skills.join(' · ')}</p>
-      <p class="skills" style="margin-top:4px">{languages.join(' · ')}</p>
+      {
+        resume.skills.map((s) => (
+          <p class="skills">
+            <b>{s.label}:</b> {s.text}
+          </p>
+        ))
+      }
+    </section>
+
+    <section>
+      <h2>Certifications &amp; hackathons</h2>
+      <p class="body">{resume.certifications}</p>
     </section>
 
     <footer>
       {stats.repos} public repositories · {stats.languages} languages · building since {stats.since} ·
-      palash-style résumé generated from src/data/site.ts
+      résumé generated from src/data/resume.json
     </footer>
   </body>
 </html>

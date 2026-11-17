@@ -1,11 +1,12 @@
 ---
 import Desktop from '../layouts/Desktop.astro';
-import { identity, projects, languages, stats, education, experience, skills } from '../data/site';
+import { identity, projects, languages, stats } from '../data/site';
+import resume from '../data/resume.json';
 ---
 
 <Desktop title="Résumé" window="Résumé" path="/resume/">
   <h1>Résumé</h1>
-  <p class="lede">{identity.tagline}</p>
+  <p class="lede">{resume.headline}</p>
 
   <div class="buttons">
     <a class="btn primary" href="/resume.pdf" download>Download PDF</a>
@@ -15,14 +16,23 @@ import { identity, projects, languages, stats, education, experience, skills } f
   </div>
 
   <h2>PROFILE</h2>
-  <p class="prose">
-    {identity.name} is an {identity.title} and final-year CSE undergraduate at SRMIST, working across AI,
-    Web3, finance, and security. Has won national-level hackathons and freelanced client projects.
-  </p>
+  <p class="prose">{resume.profile}</p>
+
+  <h2 style="margin-top:26px">EDUCATION</h2>
+  {
+    resume.education.map((e) => (
+      <section class="job">
+        <strong>{e.degree}</strong>
+        <div class="meta" style="color:var(--text-2);font-size:11px">
+          {e.school} — {e.when} — {e.detail}
+        </div>
+      </section>
+    ))
+  }
 
   <h2 style="margin-top:26px">EXPERIENCE</h2>
   {
-    experience.map((e) => (
+    resume.experience.map((e) => (
       <section class="job">
         <strong>
           {e.role} — {e.org}
@@ -37,19 +47,51 @@ import { identity, projects, languages, stats, education, experience, skills } f
     ))
   }
 
-  <h2 style="margin-top:26px">EDUCATION</h2>
+  <h2 style="margin-top:26px">LEADERSHIP</h2>
   {
-    education.map((e) => (
+    resume.leadership.map((e) => (
       <section class="job">
         <strong>
-          {e.degree} — {e.school}
+          {e.role} — {e.org}
         </strong>
         <div class="meta" style="color:var(--text-2);font-size:11px">{e.when}</div>
+        <ul>
+          {e.points.map((p) => (
+            <li>{p}</li>
+          ))}
+        </ul>
       </section>
     ))
   }
 
-  <h2 style="margin-top:26px">SELECTED WORK</h2>
+  <h2 style="margin-top:26px">SELECTED PROJECTS</h2>
+  {
+    resume.projects.map((p) => (
+      <section class="job">
+        <strong>{p.title}</strong>
+        <div class="meta" style="color:var(--text-2);font-size:11px">{p.right}</div>
+        <ul>
+          {p.points.map((point) => (
+            <li>{point}</li>
+          ))}
+        </ul>
+      </section>
+    ))
+  }
+
+  <h2 style="margin-top:26px">SKILLS</h2>
+  {
+    resume.skills.map((s) => (
+      <p class="prose">
+        <b>{s.label}:</b> {s.text}
+      </p>
+    ))
+  }
+
+  <h2 style="margin-top:26px">CERTIFICATIONS &amp; HACKATHONS</h2>
+  <p class="prose">{resume.certifications}</p>
+
+  <h2 style="margin-top:26px">ALL PROJECTS</h2>
   <table class="list">
     <tbody>
       {
@@ -67,16 +109,13 @@ import { identity, projects, languages, stats, education, experience, skills } f
     </tbody>
   </table>
 
-  <h2 style="margin-top:26px">SKILLS</h2>
-  <p>{skills.join(' · ')}</p>
-  <p class="muted">Also: {languages.join(', ')}</p>
-
   <h2 style="margin-top:26px">AT A GLANCE</h2>
   <ul class="stats">
     <li><b>{stats.repos}</b><span>Public repos</span></li>
     <li><b>{stats.languages}</b><span>Languages</span></li>
     <li><b>{projects.length}</b><span>Featured projects</span></li>
   </ul>
+  <p class="muted">Also: {languages.join(', ')}</p>
 
   <p style="margin-top:20px"><a class="btn" href={identity.portfolio} rel="noreferrer">Portfolio ↗</a></p>
 </Desktop>
